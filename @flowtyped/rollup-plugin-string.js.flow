@@ -1,0 +1,4 @@
+/** @flow */
+import type { Plugin } from "rollup-plugin-minify-template";
+
+declare export function string(opts?: Object): Plugin;
