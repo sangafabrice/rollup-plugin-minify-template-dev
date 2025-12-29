@@ -7,24 +7,20 @@
     ".": "./src/index.js"
   },
   "scripts": {
-    "rename:project": "git rebase --interactive --root; <# 1. Choose edit branch root, 2. Change name in `package.json` #>; git submodule update --recursive; git commit --no-edit --amend --all; git rebase --continue",
     "commit:lib": "npm run commit:lib --workspace=src",
     "commit:src": "npm run commit --workspace=src",
-    "push": "git push --all",
-    "push:all": "npm run push --workspaces --include-workspace-root -- -- --force",
-    "create:lib": "npm run create:lib --workspace=src; New-Item -Path lib/ -Type Junction -Value (Resolve-Path $pwd/src/lib/ | Select-Object -ExpandProperty Path)",
-    "clone": "git clone https://github.com/sangafabrice/rollup-plugin-minify-template-dev .",
-    "new:url": "git submodule set-url src https://github.com/sangafabrice/rollup-plugin-minify-template.git && git submodule update --init",
+    "push": "git push --all --recurse-submodules=on-demand",
     "package:update": "npx --no --yes npm-check-updates --upgrade --workspaces && npm install",
     "flow:stop": "flow stop; while (@(Stop-Process -Name flow -Force -PassThru -ErrorAction Ignore).Length) { Start-Sleep -Seconds 2 }",
     "build": "npm run build --workspace=src",
-    "demo": "cd demo/ ; babel rollup.config.js --out-file rollup.config.mjs --presets @babel/preset-flow --plugins babel-plugin-syntax-hermes-parser; Remove-Item dist -Recurse -ErrorAction Ignore; rollup --config"
+    "demo": "cd demo/ ; babel rollup.config.js --out-file rollup.config.mjs; Remove-Item dist -Recurse -ErrorAction Ignore; rollup --config"
   },
   "keywords": [],
   "author": "Fabrice Sanga (https://github.com/sangafabrice)",
   "license": "ISC",
   "type": "module",
   "workspaces": [
+    "build",
     "src"
   ],
   "devDependencies": {
