@@ -7,13 +7,15 @@
     ".": "./src/index.js"
   },
   "scripts": {
-    "commit:lib": "npm run commit:lib --workspace=src",
-    "commit:src": "npm run commit --workspace=src",
+    "alias:commit:all:src": "git -C src/ config --local alias.commit-all '!git add -A; git commit -m'",
+    "commit:lib": "& { $message = $args[0]; 'lib/','src/' | ForEach-Object { git -C $_ commit-all $message } }",
+    "commit:src": "git -C src/ commit-all",
+    "worktree:move": "Remove-Item lib/ -ErrorAction Ignore; git -C src/ worktree move lib ../lib/",
     "push": "git push --all --recurse-submodules=on-demand",
     "package:update": "npx --no --yes npm-check-updates --upgrade --workspaces && npm install",
     "flow:stop": "flow stop; while (@(Stop-Process -Name flow -Force -PassThru -ErrorAction Ignore).Length) { Start-Sleep -Seconds 2 }",
-    "build": "npm run build --workspace=src",
-    "demo": "cd demo/ ; babel rollup.config.js --out-file rollup.config.mjs; Remove-Item dist -Recurse -ErrorAction Ignore; rollup --config"
+    "build": "babel src/ --out-dir lib/; build; npm run build --workspace=src",
+    "demo": "$d = 'demo' ; Remove-Item $d/dist,$d/rollup.config.mjs -Recurse -ErrorAction Ignore; babel $d/rollup.config.js --out-file $d/rollup.config.mjs; cd $d/ ; rollup --config"
   },
   "keywords": [],
   "author": "Fabrice Sanga (https://github.com/sangafabrice)",
@@ -24,7 +26,7 @@
     "src"
   ],
   "devDependencies": {
-    "babel-plugin-syntax-hermes-parser": "^0.33.1",
+    "babel-plugin-syntax-hermes-parser": "^0.33.2",
     "flow-bin": "^0.295.0",
     "rollup-plugin-minify-template": "file:lib"
   }

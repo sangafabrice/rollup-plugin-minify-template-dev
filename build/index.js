@@ -192,14 +192,14 @@ function buildFlowDeclaration(ast) {
 /* 7. CLI                                                                     */
 /* -------------------------------------------------------------------------- */
 
-const input = (await import(pathToFileURL("package.json"), { with: { type: "json" } })).default.main;
+const input = (await import(pathToFileURL("src/package.json"), { with: { type: "json" } })).default.main;
 
 if (!input) {
     console.error("Usage: emit-flow <file.js>");
     process.exit(1);
 }
 
-const source = fs.readFileSync(input, "utf8");
+const source = fs.readFileSync(`src/${input}`, "utf8");
 const ast = parseFlow(source);
 const flow = buildFlowDeclaration(ast);
 
