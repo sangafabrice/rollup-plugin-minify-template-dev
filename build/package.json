@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "Inline minifier builder",
   "main": "index.js",
-  "bin": "index.js",
+  "bin": {
+    "commit-lib": "commit-lib.ps1",
+    "demo": "demo.ps1",
+    "flowstop": "flowstop.ps1",
+    "transform": "transform.ps1",
+    "write-declaration": "index.js",
+    "write-package": "package.ps1"
+  },
   "scripts": {},
   "keywords": [],
   "author": "Fabrice Sanga",

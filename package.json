@@ -3,19 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
-  "exports": {
-    ".": "./src/index.js"
-  },
   "scripts": {
-    "alias:commit:all:src": "git -C src/ config --local alias.commit-all '!git add -A; git commit -m'",
-    "commit:lib": "& { $message = $args[0]; 'lib/','src/' | ForEach-Object { git -C $_ commit-all $message } }",
+    "alias": "git -C src/ config --local alias.commit-all '!git add -A; git commit -m'",
+    "commit:lib": "commit-lib",
     "commit:src": "git -C src/ commit-all",
-    "worktree:move": "Remove-Item lib/ -ErrorAction Ignore; git -C src/ worktree move lib ../lib/",
     "push": "git push --all --recurse-submodules=on-demand",
-    "package:update": "npx --no --yes npm-check-updates --upgrade --workspaces && npm install",
-    "flow:stop": "flow stop; while (@(Stop-Process -Name flow -Force -PassThru -ErrorAction Ignore).Length) { Start-Sleep -Seconds 2 }",
-    "build": "babel src/ --out-dir lib/; build; npm run build --workspace=src",
-    "demo": "$d = 'demo' ; Remove-Item $d/dist,$d/rollup.config.mjs -Recurse -ErrorAction Ignore; babel $d/rollup.config.js --out-file $d/rollup.config.mjs; cd $d/ ; rollup --config"
+    "preinstall": "npx --no --yes npm-check-updates --upgrade --workspaces",
+    "flow:stop": "flowstop",
+    "build": "transform; write-declaration; write-package",
+    "demo": "demo"
   },
   "keywords": [],
   "author": "Fabrice Sanga (https://github.com/sangafabrice)",
