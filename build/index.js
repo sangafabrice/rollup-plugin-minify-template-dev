@@ -6,11 +6,12 @@
  */
 import fs from "fs";
 import { parse } from "@babel/parser";
-import traverseObject from "@babel/traverse";
 import * as t from "@babel/types";
-import { pathToFileURL } from "url";
+import { createRequire } from 'module';
+import { resolve } from "path";
 
-const traverse = traverseObject.default;
+const require = createRequire(import.meta.url);
+const traverse = require("@babel/traverse").default;
 
 /* -------------------------------------------------------------------------- */
 /* 1. Parse                                                                   */
@@ -192,16 +193,17 @@ function buildFlowDeclaration(ast) {
 /* 7. CLI                                                                     */
 /* -------------------------------------------------------------------------- */
 
-const input = (await import(pathToFileURL("src/package.json"), { with: { type: "json" } })).default.main;
+const input = require(resolve("src/package.json")).main;
+const libindex = "lib/" + input;
 
-if (!input) {
-    console.error("Usage: emit-flow <file.js>");
-    process.exit(1);
-}
-
-const source = fs.readFileSync(`src/${input}`, "utf8");
-const ast = parseFlow(source);
-const flow = buildFlowDeclaration(ast);
-
-fs.writeFileSync(`lib/${input}.flow`, flow);
-console.log(`✔ emitted ${input}.flow`);
+fs.watchFile(libindex, function () {
+    if (!arguments.length)
+        console.log(`The ${input} watcher is ready.`);
+    
+    const source = fs.readFileSync("src/" + input, "utf8");
+    const ast = parseFlow(source);
+    const flow = buildFlowDeclaration(ast);
+    
+    fs.writeFileSync(libindex + ".flow", flow);
+    console.log(`✔ emitted ${input}.flow`);
+}).emit("change");

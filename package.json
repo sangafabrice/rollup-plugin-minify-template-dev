@@ -10,8 +10,8 @@
     "push": "git push --all --recurse-submodules=on-demand",
     "preinstall": "npx --no --yes npm-check-updates --upgrade --workspaces",
     "flow:stop": "flowstop",
-    "build": "transform; write-declaration; write-package",
-    "demo": "demo"
+    "build": "& clean; $null = transform &; $null = write-declaration &; $null = write-package &; Wait-Event",
+    "start": "demo"
   },
   "keywords": [],
   "author": "Fabrice Sanga (https://github.com/sangafabrice)",
