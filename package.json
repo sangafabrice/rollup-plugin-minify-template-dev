@@ -10,7 +10,7 @@
     "push": "git push --all --recurse-submodules=on-demand",
     "preinstall": "npx --no --yes npm-check-updates --upgrade --workspaces",
     "flow:stop": "flowstop",
-    "build": "& clean; $null = transform &; $null = write-declaration &; $null = write-package &; Wait-Event",
+    "build": "build",
     "start": "demo"
   },
   "keywords": [],
