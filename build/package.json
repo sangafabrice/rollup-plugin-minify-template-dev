@@ -10,7 +10,7 @@
     "flowstop": "flowstop.js",
     "transform": "transform.js",
     "write-declaration": "index.js",
-    "write-package": "package.ps1"
+    "write-package": "package.js"
   },
   "scripts": {},
   "keywords": [],
