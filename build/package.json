@@ -6,7 +6,7 @@
   "bin": {
     "build": "build.ps1",
     "commit-lib": "commit-lib.ps1",
-    "demo": "demo.ps1",
+    "demo": "demo.js",
     "flowstop": "flowstop.js",
     "transform": "transform.js",
     "write-declaration": "index.js",
