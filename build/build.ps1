@@ -3,14 +3,9 @@
 Remove-Item -Path lib/*
 Copy-Item -Path src/* -Destination lib/
 
-$null = transform &
-$null = Start-Job {
-    [Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8
-    write-declaration
-}
-$null = Start-Job {
-    [Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8
-    write-package
-}
+[Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8
+$null = Start-ThreadJob { transform }
+$null = Start-ThreadJob { write-declaration }
+$null = Start-ThreadJob { write-package }
 
-Receive-Job -Job (Get-Job) -Wait -ErrorAction SilentlyContinue
+Receive-Job (Get-Job) -Wait -ErrorAction SilentlyContinue

@@ -3,14 +3,14 @@
 $package = "package.json"
 $watcher = & $PSScriptRoot/watcher (Resolve-Path src/)
 $id = "watcher"
-Register-ObjectEvent -InputObject $watcher -EventName Changed -SupportEvent $id -Action {
+Register-ObjectEvent $watcher Changed -SupportEvent $id {
     if ($args[1].Name -ne $package) { return }
     $out = Get-Content src/$package | ConvertFrom-Json
     $out.name = $out.name.Remove($out.name.Length - "src".Length - 1)
     $out.PSObject.Properties.Remove("scripts")
-    $out | ConvertTo-Json | Out-File -Path lib/$package -Encoding utf8 -NoNewline
+    $out | ConvertTo-Json | Out-File lib/$package utf8 -NoNewline
     Write-Host "✔ emitted $package"
 }
-New-Event -SourceIdentifier $id -EventArguments $watcher,@{ Name = $package } | Out-Null
+New-Event $id -EventArguments $watcher,@{ Name = $package } | Out-Null
 "The $package watcher is ready."
 Wait-Event

@@ -4,11 +4,11 @@
  * @fileoverview
  * Emit a .js.flow declaration file from a Flow-typed JS source.
  */
-import fs from "fs";
+import fs from "node:fs";
 import { parse } from "@babel/parser";
 import * as t from "@babel/types";
-import { createRequire } from 'module';
-import { resolve } from "path";
+import { createRequire } from "node:module";
+import { mainScript, outputScript } from "./main.js";
 
 const require = createRequire(import.meta.url);
 const traverse = require("@babel/traverse").default;
@@ -193,17 +193,15 @@ function buildFlowDeclaration(ast) {
 /* 7. CLI                                                                     */
 /* -------------------------------------------------------------------------- */
 
-const input = require(resolve("src/package.json")).main;
-const libindex = "lib/" + input;
-
-fs.watchFile(libindex, function () {
+fs.watchFile(mainScript, function () {
     if (!arguments.length)
-        console.log(`The ${input} watcher is ready.`);
+        console.log(`The ${mainScript} watcher is ready.`);
     
-    const source = fs.readFileSync("src/" + input, "utf8");
+    const source = fs.readFileSync(mainScript, "utf8");
     const ast = parseFlow(source);
     const flow = buildFlowDeclaration(ast);
-    
-    fs.writeFileSync(libindex + ".flow", flow);
-    console.log(`✔ emitted ${input}.flow`);
+    const flowfile = outputScript + ".flow";
+
+    fs.writeFileSync(flowfile, flow);
+    console.log("✔ emitted " + flowfile);
 }).emit("change");
