@@ -9,6 +9,7 @@
     "commit:src": "git -C src/ commit-all",
     "push": "git push --all --recurse-submodules=on-demand",
     "preinstall": "npx --no --yes npm-check-updates --upgrade --workspaces",
+    "install:build": "npm install --save-dev find-process --workspace=build",
     "flow:stop": "flowstop",
     "build": "build",
     "start": "demo"

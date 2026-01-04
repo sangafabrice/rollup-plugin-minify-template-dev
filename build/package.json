@@ -7,8 +7,8 @@
     "build": "build.ps1",
     "commit-lib": "commit-lib.ps1",
     "demo": "demo.ps1",
-    "flowstop": "flowstop.ps1",
-    "transform": "transform.ps1",
+    "flowstop": "flowstop.js",
+    "transform": "transform.js",
     "write-declaration": "index.js",
     "write-package": "package.ps1"
   },
@@ -21,6 +21,8 @@
     "@babel/cli": "^7.28.3",
     "@babel/core": "^7.28.5",
     "@babel/parser": "^7.28.5",
-    "@babel/preset-flow": "^7.27.1"
+    "@babel/preset-flow": "^7.27.1",
+    "@babel/register": "^7.28.3",
+    "find-process": "^2.0.0"
   }
 }
