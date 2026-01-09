@@ -4,12 +4,12 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "disable": "disable-validation",
     "alias": "git -C src/ config --local alias.commit-all '!git add -A; git commit -m'",
     "commit:lib": "commit-lib",
     "commit:src": "git -C src/ commit-all",
     "push": "git push --all --recurse-submodules=on-demand",
-    "preinstall": "npx --no --yes npm-check-updates --upgrade --workspaces",
-    "install:build": "npm install --save-dev find-process --workspace=build",
+    "postinstall": "install",
     "flow:stop": "flowstop",
     "build": "build",
     "start": "demo"
@@ -23,7 +23,7 @@
     "src"
   ],
   "devDependencies": {
-    "babel-plugin-syntax-hermes-parser": "^0.33.2",
+    "babel-plugin-syntax-hermes-parser": "^0.33.3",
     "flow-bin": "^0.295.0",
     "rollup-plugin-minify-template": "file:lib"
   }

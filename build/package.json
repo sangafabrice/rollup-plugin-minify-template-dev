@@ -7,7 +7,9 @@
     "build": "build.ps1",
     "commit-lib": "commit-lib.ps1",
     "demo": "demo.js",
+    "disable-validation": "settings.js",
     "flowstop": "flowstop.js",
+    "install": "dependencies.js",
     "transform": "transform.js",
     "write-declaration": "index.js",
     "write-package": "package.js"
@@ -23,6 +25,8 @@
     "@babel/parser": "^7.28.5",
     "@babel/preset-flow": "^7.27.1",
     "@babel/register": "^7.28.3",
-    "find-process": "^2.0.0"
+    "comment-json": "^4.5.1",
+    "find-process": "^2.0.0",
+    "npm-check-updates": "^19.3.1"
   }
 }
