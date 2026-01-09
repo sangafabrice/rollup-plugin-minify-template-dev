@@ -5,9 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "disable": "disable-validation",
-    "alias": "git -C src/ config --local alias.commit-all '!git add -A; git commit -m'",
     "commit:lib": "commit-lib",
-    "commit:src": "git -C src/ commit-all",
+    "commit:src": "commit-lib --only src",
     "push": "git push --all --recurse-submodules=on-demand",
     "postinstall": "install",
     "flow:stop": "flowstop",
