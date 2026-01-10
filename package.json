@@ -10,6 +10,8 @@
     "push": "push",
     "postinstall": "install",
     "flow:stop": "flowstop",
+    "watch": "babel-node --presets '@babel/preset-flow' --plugins babel-plugin-syntax-hermes-parser --watch demo/rollup.config.cjs",
+    "demo": "babel-node --presets '@babel/preset-flow' --plugins babel-plugin-syntax-hermes-parser demo/rollup.config.cjs",
     "build": "build",
     "start": "demo"
   },
