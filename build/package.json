@@ -5,11 +5,12 @@
   "main": "index.js",
   "bin": {
     "build": "build.ps1",
-    "commit-lib": "commit-lib.ps1",
+    "commit-lib": "commit-lib.js",
     "demo": "demo.js",
     "disable-validation": "settings.js",
     "flowstop": "flowstop.js",
     "install": "dependencies.js",
+    "push": "push.js",
     "transform": "transform.js",
     "write-declaration": "index.js",
     "write-package": "package.js"
@@ -27,6 +28,8 @@
     "@babel/register": "^7.28.3",
     "comment-json": "^4.5.1",
     "find-process": "^2.0.0",
-    "npm-check-updates": "^19.3.1"
+    "npm-check-updates": "^19.3.1",
+    "simple-git": "^3.30.0",
+    "yargs": "^18.0.0"
   }
 }
