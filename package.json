@@ -7,7 +7,7 @@
     "disable": "disable-validation",
     "commit:lib": "commit-lib",
     "commit:src": "commit-lib --only src",
-    "push": "git push --all --recurse-submodules=on-demand",
+    "push": "push",
     "postinstall": "install",
     "flow:stop": "flowstop",
     "build": "build",
@@ -23,7 +23,7 @@
   ],
   "devDependencies": {
     "babel-plugin-syntax-hermes-parser": "^0.33.3",
-    "flow-bin": "^0.295.0",
+    "flow-bin": "^0.296.0",
     "rollup-plugin-minify-template": "file:lib"
   }
 }
