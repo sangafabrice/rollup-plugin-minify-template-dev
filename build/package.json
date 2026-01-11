@@ -4,7 +4,7 @@
   "description": "Inline minifier builder",
   "main": "write_declaration.js",
   "bin": {
-    "build": "build.cjs",
+    "build": "build.js",
     "commit-lib": "commit-lib.js",
     "demo": "demo.js",
     "disable-validation": "settings.js",
