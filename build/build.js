@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+import { glob, copyFile, rm } from "node:fs/promises";
+import { basename } from "node:path";
+
+await removeItem("lib/*");
+await copyItem("src/*", "lib/");
+[
+    "transform",
+    "write_declaration",
+    "write_package",
+].forEach(name => import(`./${name}.js`));
+
+async function removeItem(pathLike) {
+    for await (const file of glob(pathLike)) {
+        await rm(file, { force: true });
+    }
+}
+
+async function copyItem(pathLike, destination) {
+    for await (const file of glob(pathLike)) {
+        await copyFile(file, destination + basename(file));
+    }
+}
