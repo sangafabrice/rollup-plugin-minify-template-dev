@@ -3,13 +3,13 @@
 import { glob, copyFile, rm } from "node:fs/promises";
 import { basename } from "node:path";
 
-await removeItem("lib/*");
-await copyItem("src/*", "lib/");
-[
+removeItem("lib/*")
+.then(() => copyItem("src/*", "lib/"))
+.then(() => [
     "transform",
     "write_declaration",
     "write_package",
-].forEach(name => import(`./${name}.js`));
+].forEach(name => import(`./${name}.js`)));
 
 async function removeItem(pathLike) {
     for await (const file of glob(pathLike)) {
