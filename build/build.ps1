@@ -6,8 +6,8 @@ Copy-Item -Path src/* -Destination lib/
 [Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8
 @(
     "transform"
-    "write-declaration"
-    "write-package"
+    "write_declaration"
+    "write_package"
 ) | ForEach-Object -Parallel {
-    & $_
+    node "build/$_.js" 
 }

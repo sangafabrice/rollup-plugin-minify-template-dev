@@ -2,7 +2,7 @@
   "name": "build",
   "version": "1.0.0",
   "description": "Inline minifier builder",
-  "main": "index.js",
+  "main": "write_declaration.js",
   "bin": {
     "build": "build.ps1",
     "commit-lib": "commit-lib.js",
@@ -12,8 +12,8 @@
     "install": "dependencies.js",
     "push": "push.js",
     "transform": "transform.js",
-    "write-declaration": "index.js",
-    "write-package": "package.js"
+    "write-declaration": "write_declaration.js",
+    "write-package": "write_package.js"
   },
   "scripts": {},
   "keywords": [],
