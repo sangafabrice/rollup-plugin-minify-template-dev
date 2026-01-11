@@ -10,8 +10,8 @@
     "push": "push",
     "postinstall": "install",
     "flow:stop": "flowstop",
-    "watch": "cd demo/&& babel-node --watch rollup.config.cjs",
-    "demo": "cd demo/&& babel-node rollup.config.cjs",
+    "watch": "demo-alt --watch",
+    "demo": "demo-alt",
     "build": "build",
     "start": "demo"
   },
