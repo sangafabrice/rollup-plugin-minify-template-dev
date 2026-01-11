@@ -10,6 +10,4 @@ Copy-Item -Path src/* -Destination lib/
     "write-package"
 ) | ForEach-Object -Parallel {
     & $_
-} -AsJob | Out-Null
-
-Receive-Job (Get-Job) -Wait -ErrorAction SilentlyContinue
+}
