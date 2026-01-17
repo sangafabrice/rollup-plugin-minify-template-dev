@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-import ncu from "npm-check-updates";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const ncu = require("npm-check-updates");
 
 ncu.run({
     upgrade: true,
-    install: "always",
     workspaces: true
 }).then(console.log);

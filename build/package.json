@@ -10,7 +10,6 @@
     "demo-alt": "demo_alt.ps1",
     "disable-validation": "settings.js",
     "flowstop": "flowstop.js",
-    "install": "dependencies.js",
     "push": "push.js",
     "transform": "transform.js",
     "write-declaration": "write_declaration.js",
@@ -28,7 +27,6 @@
     "@babel/preset-flow": "^7.27.1",
     "comment-json": "^4.5.1",
     "find-process": "^2.0.0",
-    "npm-check-updates": "^19.3.1",
     "simple-git": "^3.30.0",
     "yargs": "^18.0.0"
   }
