@@ -7,7 +7,7 @@
     "build": "build.js",
     "commit-lib": "commit-lib.js",
     "demo": "demo.js",
-    "demo-alt": "demo_alt.ps1",
+    "demo-alt": "demo_alt.js",
     "disable-validation": "settings.js",
     "flowstop": "flowstop.js",
     "push": "push.js",
