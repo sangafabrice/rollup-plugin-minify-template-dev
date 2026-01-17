@@ -8,7 +8,7 @@
     "commit:lib": "commit-lib",
     "commit:src": "commit-lib --only src",
     "push": "push",
-    "preinstall": "setup/preinstall",
+    "preinstall": "node setup/dependencies.cjs",
     "postinstall": "disable-validation",
     "flow:stop": "flowstop",
     "watch": "demo-alt --watch",
