@@ -8,7 +8,7 @@
     "commit:lib": "commit-lib",
     "commit:src": "commit-lib --only src",
     "push": "push",
-    "preinstall": "$env:NODE_PATH = npm root --global; node build/dependencies; setup/preinstall",
+    "preinstall": "setup/preinstall",
     "postinstall": "disable-validation",
     "flow:stop": "flowstop",
     "watch": "demo-alt --watch",
