@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
-import { createRequire } from "node:module";
-const require = createRequire(import.meta.url);
+module.paths.push(
+    require("node:child_process")
+        .execSync("npm root --global")
+        .toString().trim()
+);
 const ncu = require("npm-check-updates");
 
 ncu.run({
