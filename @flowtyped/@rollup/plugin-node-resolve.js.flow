@@ -1,4 +1,4 @@
 /** @flow */
 import type { Plugin } from "rollup-plugin-minify-template";
 
-declare export default function urlResolve(): Plugin;
+declare export function nodeResolve(opts?: Object): Plugin;

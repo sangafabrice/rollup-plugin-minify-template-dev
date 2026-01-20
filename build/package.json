@@ -34,10 +34,11 @@
     "@babel/node": "^7.28.6",
     "@babel/preset-flow": "^7.27.1",
     "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
     "comment-json": "^4.5.1",
     "find-process": "^2.0.0",
-    "rollup-plugin-url-resolve": "^0.2.0",
     "simple-git": "^3.30.0",
+    "string-format": "^2.0.0",
     "yargs": "^18.0.0"
   }
 }

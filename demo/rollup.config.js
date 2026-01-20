@@ -2,7 +2,7 @@
 import { string } from "rollup-plugin-string";
 import minifyTemplate from "rollup-plugin-minify-template";
 import { babel } from "@rollup/plugin-babel";
-import urlResolve from "rollup-plugin-url-resolve";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 // $FlowFixMe[cannot-resolve-module]
 import configFile from "build/babelrc";
 import type { OptionExtension, Plugin } from "rollup-plugin-minify-template";
@@ -36,7 +36,7 @@ const configs: Config = {
 	context: "window",
 	plugins: [
 		babelPlugin,
-		urlResolve(),
+		nodeResolve(),
 		minifyPlugin,
 		stringPlugin
 	]

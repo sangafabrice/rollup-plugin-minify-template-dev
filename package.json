@@ -8,6 +8,7 @@
     "settings": "settings",
     "commit:lib": "commit-lib",
     "commit:src": "commit-lib --only src",
+    "commit:w3c": "commit-lib --only demo/w3c/src",
     "push": "push",
     "preinstall": "node setup",
     "postinstall": "settings",
