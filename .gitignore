@@ -1,4 +1,6 @@
 /.vscode/
-/lib/
+lib/
 /node_modules/
 /package-lock.json
+*.jpg
+com.chrome.devtools.json

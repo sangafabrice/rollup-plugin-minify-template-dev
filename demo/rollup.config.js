@@ -1,51 +1,37 @@
 /** @flow */
 import { string } from "rollup-plugin-string";
 import minifyTemplate from "rollup-plugin-minify-template";
+import flow from "rollup-plugin-flow";
+import urlResolve from "rollup-plugin-url-resolve";
 import type { OptionExtension, Plugin } from "rollup-plugin-minify-template";
+import type { Config } from "config";
 
+// $FlowFixMe[unsafe-addition]
 // $FlowFixMe[cannot-resolve-name]
-process.chdir(import.meta.dirname);
+process.chdir(import.meta.dirname + "/w3c");
 
 const stringPlugin = string({ include: "src/assets/*.*" });
 
-const extensions: ReadonlyArray<OptionExtension> = [
-	".html",
-	[ ".css" ],
-	[],
-	[ ".css", ".svg" ],
-	[ ".html", ".css", ".svg" ]
-];
+const extensions: OptionExtension = [ ".html", ".css", ".svg" ];
 
-const input = "src/example.js";
+const minifyPlugin = minifyTemplate({ extensions });
 
-type Config = {
-	input: "src/example.js",
-	output: { file: string },
-	plugins: Array<Plugin>
-};
+const input = "src/index.js";
 
-const configs: Array<Config> = [{
+const configs: Config = {
 	input,
 	output: {
-		file: "dist/example.js"
+		file: "lib/photocarousel.js",
+        format: "iife",
+        name: "photocarousel"
 	},
+	context: "window",
 	plugins: [
-		minifyTemplate(),
+		flow(),
+		urlResolve(),
+		minifyPlugin,
 		stringPlugin
 	]
-}];
+};
 
-const configsToConcat = extensions.map((extensions, i): Config => {
-	return {
-		input,
-		output: {
-			file: "dist/example-" + (i + 1) + ".js"
-		},
-		plugins: [
-			minifyTemplate({ extensions }),
-			stringPlugin
-		]
-	};
-});
-
-export default configs.concat(configsToConcat) as Array<Config>;
+export default configs;

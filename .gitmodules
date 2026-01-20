@@ -1,3 +1,6 @@
 [submodule "src"]
 	path = src
 	url = https://github.com/sangafabrice/rollup-plugin-minify-template.git
+[submodule "demo/w3c/src"]
+	path = demo/w3c/src
+	url = https://github.com/sangafabrice/fttl-photo-carousel.git

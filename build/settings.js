@@ -13,24 +13,35 @@ const settingsText = fs.mkdir(vscodedir, { recursive: true })
 
 settingsText.then(jsonc.parse)
     .then(function (settings) {
-        const PROPERTY = "javascript.validate.enable";
+        const setSetting = (propertyname, value, linecomment) => {
+            if (settings[propertyname] == value || settings[propertyname] === value)
+                return;
+            settings[propertyname] = value;
+            linecomment &&
+            (settings[Symbol.for("before:" + propertyname)] ??= []).push({
+                type: "LineComment",
+                value: " @generated: " + linecomment,
+                inline: false
+            });
+        }
 
-        if (settings[PROPERTY] === false)
-            throw "javascript validation already disabled";
-
-        // Disabling javascript validation and comment
-        settings[PROPERTY] = false;
-        (settings[Symbol.for("before:" + PROPERTY)] ??= []).push({
-            type: "LineComment",
-            value: " @generated: Required when setting up Flow.js",
-            inline: false
-        });
+        setSetting(
+            "javascript.validate.enable", false,
+            "Required when setting up Flow.js"
+        );
+        setSetting(
+            "livePreview.previewDebounceDelay", 1000,
+            "Required when setting up Live Preview"
+        );
+        setSetting(
+            "livePreview.serverRoot", "/demo/w3c"
+        );
 
         return settingsText.then(detectIndent)
             .then(jsonc.stringify.bind(jsonc, settings, null));
     })
     .then(fs.writeFile.bind(fs, settingsFile))
-    .then(() => console.log("✔ disabled javascript validation"))
+    .then(() => console.log("✔ settings configured"))
     .catch(console.log)
 
 function detectIndent(text) {

@@ -1,0 +1,13 @@
+/** @flow */
+import type { Plugin } from "rollup-plugin-minify-template";
+
+export type Config = {
+    input: string,
+    output: {
+        file: string,
+        format?: "iife",
+        name?: string
+    },
+    context?: string,
+    plugins: Array<Plugin>
+};

@@ -15,10 +15,12 @@ const [ dist, config, configmjs ] = [
 
 rmSync(dist, { force: true, recursive: true });
 
+const configmjspath = resolve(configmjs);
+
 watchFile(config, async function () {
     if (!arguments.length)
         console.log(`The ${config} watcher is ready.`);
-    await loadConfigFile(resolve(configmjs))
+    await loadConfigFile(configmjspath)
         .then(({ options }) =>
             options.forEach(async (option) => {
                 const { input, output } = option;

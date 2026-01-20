@@ -2,6 +2,7 @@
 const { string } = require("rollup-plugin-string");
 const { default: minifyTemplate } = require("rollup-plugin-minify-template");
 import type { OptionExtension, Plugin } from "rollup-plugin-minify-template";
+import type { Config } from "config";
 
 // $FlowFixMe[cannot-resolve-name]
 process.chdir(__dirname);
@@ -17,12 +18,6 @@ const extensions: ReadonlyArray<OptionExtension> = [
 ];
 
 const input = "src/example.js";
-
-type Config = {
-	input: "src/example.js",
-	output: { file: string },
-	plugins: Array<Plugin>
-};
 
 const configs: Array<Config> = [{
 	input,

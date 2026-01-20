@@ -4,17 +4,19 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "disable": "disable-validation",
+    "dl:img": "dl-img",
+    "settings": "settings",
     "commit:lib": "commit-lib",
     "commit:src": "commit-lib --only src",
     "push": "push",
     "preinstall": "node setup",
-    "postinstall": "disable-validation",
+    "postinstall": "settings",
     "flow:stop": "flowstop",
     "watch": "demo-alt --watch",
     "demo": "demo-alt",
     "build": "build",
-    "start": "demo"
+    "watch:config": "demo",
+    "start": "watch-photo-demo"
   },
   "keywords": [],
   "author": "Fabrice Sanga (https://github.com/sangafabrice)",
@@ -26,7 +28,7 @@
   ],
   "devDependencies": {
     "babel-plugin-syntax-hermes-parser": "^0.33.3",
-    "flow-bin": "^0.297.0",
+    "flow-bin": "^0.298.0",
     "rollup-plugin-minify-template": "file:lib"
   }
 }

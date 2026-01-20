@@ -9,3 +9,27 @@ git clone https://github.com/sangafabrice/rollup-plugin-minify-template-dev . --
 npm install --global npm-check-updates
 npm install
 ```
+### 3. Install Live Preview on VS Code:
+```bash
+code --install-extension ms-vscode.live-server
+```
+### 4. Generate devtools config to open the project in browser Source pane:
+```bash
+npx --yes devtools-json-generator demo/w3c/
+```
+### 5. Download images for demo and build self-contained web component:
+```bash
+npm run dl:img
+npm start
+```
+
+### 6. Start default server:
+Open a file in the server root folder like `index.html` and press `Ctrl+Shift+P` and choose `Live Preview: Start Server Logging`.
+
+## Initial Setup
+
+### 1. Add submodule twice since the repository was empty at first:
+```bash
+git submodule add https://github.com/sangafabrice/fttl-photo-carousel.git demo/w3c/src
+git submodule foreach 'git push'
+```
