@@ -19,7 +19,7 @@ const { message, only } = yargs(hideBin(process.argv))
     .option("only", {
         describe: "Limit processing to a specific directory",
         type: "string",
-        choices: DIRS,
+        choices: [...DIRS, "demo/w3c/src"],
         coerce: values => [ values ]
     })
     .check(argv => {

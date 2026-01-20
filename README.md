@@ -25,11 +25,3 @@ npm start
 
 ### 6. Start default server:
 Open a file in the server root folder like `index.html` and press `Ctrl+Shift+P` and choose `Live Preview: Start Server Logging`.
-
-## Initial Setup
-
-### 1. Add submodule twice since the repository was empty at first:
-```bash
-git submodule add https://github.com/sangafabrice/fttl-photo-carousel.git demo/w3c/src
-git submodule foreach 'git push'
-```

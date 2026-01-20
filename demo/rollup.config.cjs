@@ -1,13 +1,28 @@
 /** @flow */
 const { string } = require("rollup-plugin-string");
 const { default: minifyTemplate } = require("rollup-plugin-minify-template");
+const { babel } = require("@rollup/plugin-babel");
+// $FlowFixMe[cannot-resolve-module]
+const configFile = require("build/babelrc");
 import type { OptionExtension, Plugin } from "rollup-plugin-minify-template";
 import type { Config } from "config";
 
 // $FlowFixMe[cannot-resolve-name]
-process.chdir(__dirname);
+process.chdir(__dirname + "/example/");
 
 const stringPlugin = string({ include: "src/assets/*.*" });
+
+const babelPlugin = babel({
+	babelHelpers: "bundled",
+	comments: false,
+	configFile
+});
+
+const plugins = [
+	babelPlugin,
+	minifyTemplate(),
+	stringPlugin
+];
 
 const extensions: ReadonlyArray<OptionExtension> = [
 	".html",
@@ -17,30 +32,17 @@ const extensions: ReadonlyArray<OptionExtension> = [
 	[ ".html", ".css", ".svg" ]
 ];
 
-const input = "src/example.js";
+const input = "src/index.js";
 
-const configs: Array<Config> = [{
-	input,
-	output: {
-		file: "dist/example.js"
-	},
-	plugins: [
-		minifyTemplate(),
-		stringPlugin
-	]
-}];
+function config(file: string): Config {
+	return { input, output: { file }, plugins }
+}
 
-const configsToConcat = extensions.map((extensions, i): Config => {
-	return {
-		input,
-		output: {
-			file: "dist/example-" + (i + 1) + ".js"
-		},
-		plugins: [
-			minifyTemplate({ extensions }),
-			stringPlugin
-		]
-	};
+const configs = [config("dist/example.js")];
+
+const configsToConcat = extensions.map((extensions, i) => {
+	plugins[1] = minifyTemplate({ extensions });
+	return config(`dist/example-${i + 1}.js`);
 });
 
 const options = configs.concat(configsToConcat) as Array<Config>;

@@ -1,8 +1,10 @@
 /** @flow */
 import { string } from "rollup-plugin-string";
 import minifyTemplate from "rollup-plugin-minify-template";
-import flow from "rollup-plugin-flow";
+import { babel } from "@rollup/plugin-babel";
 import urlResolve from "rollup-plugin-url-resolve";
+// $FlowFixMe[cannot-resolve-module]
+import configFile from "build/babelrc";
 import type { OptionExtension, Plugin } from "rollup-plugin-minify-template";
 import type { Config } from "config";
 
@@ -16,6 +18,12 @@ const extensions: OptionExtension = [ ".html", ".css", ".svg" ];
 
 const minifyPlugin = minifyTemplate({ extensions });
 
+const babelPlugin = babel({
+	babelHelpers: "bundled",
+	comments: false,
+	configFile
+});
+
 const input = "src/index.js";
 
 const configs: Config = {
@@ -27,7 +35,7 @@ const configs: Config = {
 	},
 	context: "window",
 	plugins: [
-		flow(),
+		babelPlugin,
 		urlResolve(),
 		minifyPlugin,
 		stringPlugin
