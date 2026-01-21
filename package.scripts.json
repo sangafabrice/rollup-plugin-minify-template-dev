@@ -1,0 +1,30 @@
+{
+  // Download the images
+  // for the web component demo
+  "download:images": "dl-img",
+  // Configure VS Code:
+  // - Disable JavaScript validation for FlowJS
+  // - Configure Live Preview for the demo server
+  "vscode:settings": "settings",
+  // Commit from submodules
+  "commit:lib": "commit-lib",
+  "commit:src": "commit-lib --only src",
+  "commit:w3c": "commit-lib --only demo/w3c/src",
+  // Push to GitHub the super and sub projects
+  "push": "push",
+  // Project setup from the initial install command
+  "preinstall": "node setup",
+  "postinstall": "settings",
+  // Stop the flow-typed LSP and processes
+  "flow:stop": "flowstop",
+  // Demo of flow-typed Rollup config file
+  // - CommonJS Rollup config file using babel-node
+  "watch:alt": "demo-alt --watch",
+  "demo:alt": "demo-alt",
+  // - ESM Rollup config file using babel require-hook
+  "watch": "demo",
+  // Build the rollup plugin: minify template
+  "build": "build",
+  // Start demo of the web component
+  "start": "watch-photo-demo"
+}

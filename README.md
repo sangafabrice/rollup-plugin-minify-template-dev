@@ -19,9 +19,20 @@ npx --yes devtools-json-generator demo/w3c/
 ```
 ### 5. Download images for demo and build self-contained web component:
 ```bash
-npm run dl:img
+npm run download:images
 npm start
 ```
 
 ### 6. Start default server:
 Open a file in the server root folder like `index.html` and press `Ctrl+Shift+P` and choose `Live Preview: Start Server Logging`.
+
+### 7. JSONC scripts file processing
+Open the `package.scripts.json` and press `Ctrl+K M` to select the language of the file, then type `JSON with Comments (jsonc)` to disable comments validation. To make it permanent, run the command below:
+```bash
+npm run vscode:settings
+```
+
+To strip comments using breakpoint, start the script `setup/npmc.ps1` which inserts the scripts in the `package.json` file from the adjacent `package.scripts.json` when it exists:
+```powershell
+setup/npmc.ps1
+```

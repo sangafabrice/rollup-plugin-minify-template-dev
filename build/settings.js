@@ -36,6 +36,10 @@ settingsText.then(jsonc.parse)
         setSetting(
             "livePreview.serverRoot", "/demo/w3c"
         );
+        setSetting(
+            "files.associations", { "*.scripts.json": "jsonc" },
+            "Required when setting up the npm scripts JSONC file"
+        );
 
         return settingsText.then(detectIndent)
             .then(jsonc.stringify.bind(jsonc, settings, null));
