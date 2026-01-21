@@ -3,6 +3,8 @@ import { string } from "rollup-plugin-string";
 import minifyTemplate from "rollup-plugin-minify-template";
 import { babel } from "@rollup/plugin-babel";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
+import { autoReload } from "rollup-plugin-auto-reload";
+import serve from "rollup-plugin-serve";
 // $FlowFixMe[cannot-resolve-module]
 import configFile from "build/babelrc";
 import type { OptionExtension, Plugin } from "rollup-plugin-minify-template";
@@ -24,6 +26,11 @@ const babelPlugin = babel({
 	configFile
 });
 
+const servePlugin = serve({
+	open: true,
+	port: 8080
+})
+
 const input = "src/index.js";
 
 const configs: Config = {
@@ -35,6 +42,8 @@ const configs: Config = {
 	},
 	context: "window",
 	plugins: [
+		autoReload(),
+		servePlugin,
 		babelPlugin,
 		nodeResolve(),
 		minifyPlugin,
