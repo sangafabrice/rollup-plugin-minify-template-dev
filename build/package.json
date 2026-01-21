@@ -34,6 +34,7 @@
     "@babel/node": "^7.28.6",
     "@babel/preset-flow": "^7.27.1",
     "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "comment-json": "^4.5.1",
     "find-process": "^2.0.0",

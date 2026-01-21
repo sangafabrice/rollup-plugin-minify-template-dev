@@ -1,0 +1,4 @@
+/** @flow */
+import type { Plugin } from "rollup-plugin-minify-template";
+
+declare export default function commonjs(opts?: Object): Plugin;
