@@ -1,4 +1,4 @@
-$npmps1 = & "$PSScriptRoot/where.bat" npm.ps1
+$npmps1 = (Get-Command npm.ps1).Source
 if ([string]::IsNullOrEmpty($npmps1)) { return }
 Set-PSBreakpoint -Script $npmps1 -Line 2 -Action {
     if (${Script:args}[0] -inotin @(
