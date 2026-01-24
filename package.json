@@ -17,7 +17,8 @@
     "demo:alt": "demo-alt",
     "watch": "demo",
     "build": "build",
-    "start": "watch-photo-demo"
+    "start": "watch-photo-demo",
+    "start:noserver": "npm start -- -- --no-server"
   },
   "keywords": [],
   "author": "Fabrice Sanga (https://github.com/sangafabrice)",

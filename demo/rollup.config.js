@@ -51,4 +51,8 @@ const configs: Config = {
 	]
 };
 
-export default configs;
+export default function({ configNoServer = false }: { configNoServer: boolean }): Config {
+	if (configNoServer)
+		configs.plugins = configs.plugins.slice(2)
+	return configs;
+};

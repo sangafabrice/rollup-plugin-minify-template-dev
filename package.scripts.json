@@ -26,5 +26,6 @@
   // Build the rollup plugin: minify template
   "build": "build",
   // Start demo of the web component
-  "start": "watch-photo-demo"
+  "start": "watch-photo-demo",
+  "start:noserver": "npm start -- -- --no-server"
 }
