@@ -13,7 +13,7 @@
     "flowstop": "flowstop.js",
     "push": "push.js",
     "transform": "transform.js",
-    "watch-photo-demo": "watch_photo_demo.ps1",
+    "watch-photo-demo": "watch_photo_demo.js",
     "write-declaration": "write_declaration.js",
     "write-package": "write_package.js"
   },
