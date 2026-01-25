@@ -17,5 +17,7 @@ ForEach-Object {
 } -End {
     Start-BitsTransfer $urls $paths -Asynchronous -OutVariable bitsJob
     $jobId = $bitsJob.JobId
-    Start-Process pwsh "-Command complete-dl-img $jobId" -WindowStyle Hidden
+    $ps = Join-Path $PSHOME "pwsh.exe"
+    $cmd = 'pwsh -Command "Get-BitsTransfer -JobId {0} | Complete-BitsTransfer"' -f $jobId
+    bitsadmin /setNotifyCmdLine "{$jobId}" $ps $cmd
 }
