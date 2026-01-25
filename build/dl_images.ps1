@@ -1,6 +1,5 @@
 #!/usr/bin/env pwsh
 
-$urls = @(); $paths = @()
 $imgpath = "demo/w3c/img"
 New-Item $imgpath -ErrorAction SilentlyContinue
 Set-Location $imgpath &&
@@ -10,14 +9,16 @@ Set-Location $imgpath &&
     "nKBgeLOr"
     "yVjJZ1Yr"
 ) | 
-ForEach-Object { "$_.jpg" } |
+ForEach-Object { "$_.jpg" } -PipelineVariable jpgname |
 ForEach-Object {
-    $urls += "https://i.imgur.com/$_"
-    $paths += Join-Path $PWD $_
+    Start-ThreadJob {
+        $jpg = $Using:jpgname
+        $curlargs = @{
+            Uri = "https://i.imgur.com/$jpg"
+            OutFile = Join-Path $PWD $jpg
+        }
+        Invoke-WebRequest @curlargs
+    }
 } -End {
-    Start-BitsTransfer $urls $paths -Asynchronous -OutVariable bitsJob
-    $jobId = $bitsJob.JobId
-    $ps = Join-Path $PSHOME "pwsh.exe"
-    $cmd = 'pwsh -Command "Get-BitsTransfer -JobId {0} | Complete-BitsTransfer"' -f $jobId
-    bitsadmin /setNotifyCmdLine "{$jobId}" $ps $cmd
+    Wait-Job -Job (Get-Job)
 }
