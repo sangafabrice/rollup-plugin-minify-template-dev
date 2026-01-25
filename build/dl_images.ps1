@@ -1,5 +1,6 @@
 #!/usr/bin/env pwsh
 
+$urls = @(); $paths = @()
 $imgpath = "demo/w3c/img"
 New-Item $imgpath -ErrorAction SilentlyContinue
 Set-Location $imgpath &&
@@ -10,18 +11,9 @@ Set-Location $imgpath &&
     "yVjJZ1Yr"
 ) | 
 ForEach-Object { "$_.jpg" } |
-ForEach-Object -Begin {
-    $guid = (
-            bitsadmin /create /download myjob | 
-            Select-Object -Last 1
-        ) -replace "^.+\{(.+)\}\.",'$1'
-    $bitsJob = Get-BitsTransfer -JobId $guid
-} -Process {
-    Add-BitsFile $bitsJob "https://i.imgur.com/$_" (Join-Path $PWD $_)
+ForEach-Object {
+    $urls += "https://i.imgur.com/$_"
+    $paths += Join-Path $PWD $_
 } -End {
-    $jobId = $bitsJob.JobId.Guid
-    Start-Process -FilePath pwsh -ArgumentList "-Command",@"
-        `$bitsJob = Get-BitsTransfer -JobId $jobId
-        Resume-BitsTransfer `$bitsJob
-"@  -WindowStyle Hidden
+    Start-BitsTransfer $urls $paths
 }
