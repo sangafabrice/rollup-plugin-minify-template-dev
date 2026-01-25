@@ -15,11 +15,7 @@ ForEach-Object {
     $urls += "https://i.imgur.com/$_"
     $paths += Join-Path $PWD $_
 } -End {
-    $OFS = "','"
-    $gpsargs = @{
-        FilePath = "pwsh"
-        ArgumentList = "-c","Start-BitsTransfer '$urls' '$paths'"
-        WindowStyle = "Hidden"
-    }
-    Start-Process @gpsargs
+    Start-BitsTransfer $urls $paths -Asynchronous -OutVariable bitsJob
+    $jobId = $bitsJob.JobId
+    Start-Process pwsh "-Command complete-dl-img $jobId" -WindowStyle Hidden
 }
