@@ -14,12 +14,5 @@ for /f "usebackq" %%i in ("%~dp0\images.conf") do (
     bitsadmin /addfile %myjob% https://i.imgur.com/%%i.jpg "%cd%\%%i.jpg" | find "Added"
 )
 bitsadmin /resume %myjob% | find "Job"
-:loop
-for /f "skip=4" %%s in ('bitsadmin /getstate %myjob%') do (
-    set /p "=_"<nul
-    timeout /t 1 > nul
-    if not "%%s"=="TRANSFERRED" goto :loop
-)
-echo.
-bitsadmin /complete %myjob% | find "Job"
+start /min complete-dl-img %myjob%
 exit /b

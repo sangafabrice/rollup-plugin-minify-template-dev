@@ -10,6 +10,7 @@
     "demo-alt": "demo_alt.js",
     "settings": "settings.js",
     "dl-img": "dl_images.cmd",
+    "complete-dl-img": "dl_images_completion.cmd",
     "flowstop": "flowstop.js",
     "push": "push.js",
     "transform": "transform.js",
