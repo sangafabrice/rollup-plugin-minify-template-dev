@@ -26,6 +26,7 @@
   // Build the rollup plugin: minify template
   "build": "build",
   // Start demo of the web component
+  "prestart": "Get-BitsTransfer | Where-Object JobState -EQ Transferred | Complete-BitsTransfer",
   "start": "watch-photo-demo",
   "start:noserver": "npm start -- -- --no-server"
 }

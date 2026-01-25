@@ -17,6 +17,8 @@
     "demo:alt": "demo-alt",
     "watch": "demo",
     "build": "build",
+    "prestart": "Get-BitsTransfer | Where-Object JobState -EQ Transferred | Complete-BitsTransfer",
+    "prestart:noserver": "Get-BitsTransfer | Where-Object JobState -EQ Transferred | Complete-BitsTransfer",
     "start": "watch-photo-demo",
     "start:noserver": "npm start -- -- --no-server"
   },
