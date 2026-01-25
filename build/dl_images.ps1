@@ -19,6 +19,9 @@ ForEach-Object -Begin {
 } -Process {
     Add-BitsFile $bitsJob "https://i.imgur.com/$_" (Join-Path $PWD $_)
 } -End {
-    Set-BitsTransfer $bitsJob -Priority High
-    Resume-BitsTransfer $bitsJob -Asynchronous
+    $jobId = $bitsJob.JobId.Guid
+    Start-Process -FilePath pwsh -ArgumentList "-Command",@"
+        `$bitsJob = Get-BitsTransfer -JobId $jobId
+        Resume-BitsTransfer `$bitsJob
+"@  -WindowStyle Hidden
 }
