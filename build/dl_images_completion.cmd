@@ -1,4 +1,4 @@
-#!/usr/bin/env -S cmd /q /c
+@echo off
 
 :loop
 for /f "skip=4" %%s in ('bitsadmin /getstate %myjob%') do (
@@ -10,6 +10,4 @@ echo.
 bitsadmin /complete %myjob% | find "Job"
 
 :: Close pop-up console window when parent is npx caller
-node --eval="p=process;p.exit(p.ppid)"
-pwsh -Command exit (Get-Process -Id %errorlevel%).Parent.Id
-taskkill /pid %errorlevel%
+exit
