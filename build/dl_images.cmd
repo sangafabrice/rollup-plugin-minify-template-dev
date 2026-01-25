@@ -14,5 +14,5 @@ for /f "usebackq" %%i in ("%~dp0\images.conf") do (
     bitsadmin /addfile %myjob% https://i.imgur.com/%%i.jpg "%cd%\%%i.jpg" | find "Added"
 )
 bitsadmin /resume %myjob% | find "Job"
-start /min complete-dl-img %myjob%
+start /min complete-dl-img
 exit /b
