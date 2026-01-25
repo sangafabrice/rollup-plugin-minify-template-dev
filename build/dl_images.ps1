@@ -10,11 +10,14 @@ Set-Location $imgpath &&
     "yVjJZ1Yr"
 ) | 
 ForEach-Object { "$_.jpg" } |
-Select-Object @{
-    Name = "Source"
-    Expression = { "https://i.imgur.com/$_" }
-},@{
-    Name = "Destination"
-    Expression = { Join-Path $PWD $_ }
-} |
-Start-BitsTransfer
+ForEach-Object -Begin {
+    $guid = (
+            bitsadmin /create /download myjob | 
+            Select-Object -Last 1
+        ) -replace "^.+\{(.+)\}\.",'$1'
+    $bitsJob = Get-BitsTransfer -JobId $guid
+} -Process {
+    Add-BitsFile $bitsJob "https://i.imgur.com/$_" (Join-Path $PWD $_)
+} -End {
+    Resume-BitsTransfer $bitsJob
+}
