@@ -2,13 +2,12 @@ $npmps1 = @(where.exe npm.ps1)[0]
 if ([string]::IsNullOrEmpty($npmps1)) { return }
 $job = Start-ThreadJob {
     $root = $Using:PSScriptRoot
-    $guid = (
-            bitsadmin /create /download myjob | 
-            Select-Object -Last 1
-        ) -replace "^.+(\{.+\})\.",'$1'
-    $source = "https://raw.github.com/douglascrockford/JSMin/master/jsmin.exe"
-    bitsadmin /transfer $guid $source "$root\jsmin.exe" | find "Transfer complete."
-    bitsadmin /complete $guid | find "Job completed."
+    $bitsargs = @{
+        Source = "https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe"
+        Destination = "$root/jsmin.exe"
+        CustomHeaders = "Accept: application/vnd.github.raw"
+    }
+    Start-BitsTransfer @bitsargs
 }
 function Global:Find-PackageJson ($path) {
     if (Test-Path ($packagejson = Join-Path $path package.json))
