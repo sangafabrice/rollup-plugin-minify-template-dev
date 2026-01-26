@@ -3,11 +3,11 @@ if ([string]::IsNullOrEmpty($npmps1)) { return }
 $job = Start-ThreadJob {
     $root = $Using:PSScriptRoot
     $bitsargs = @{
-        Source = "https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe"
-        Destination = "$root/jsmin.exe"
-        CustomHeaders = "Accept: application/vnd.github.raw"
+        Uri = "https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe"
+        OutFile = "$root/jsmin.exe"
+        Headers = @{ Accept = "application/vnd.github.raw" }
     }
-    Start-BitsTransfer @bitsargs
+    Invoke-WebRequest @bitsargs
 }
 function Global:Find-PackageJson ($path) {
     if (Test-Path ($packagejson = Join-Path $path package.json))
