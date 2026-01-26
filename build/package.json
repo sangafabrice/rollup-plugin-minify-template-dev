@@ -9,7 +9,7 @@
     "demo": "demo.js",
     "demo-alt": "demo_alt.js",
     "settings": "settings.js",
-    "dl-img": "dl_images.ps1",
+    "dl-img": "dl_images.js",
     "flowstop": "flowstop.js",
     "push": "push.js",
     "transform": "transform.js",
