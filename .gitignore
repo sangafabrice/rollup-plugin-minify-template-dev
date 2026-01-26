@@ -5,4 +5,5 @@ dist/
 /package-lock.json
 *.jpg
 *.exe
+*.tmp
 com.chrome.devtools.json
