@@ -2,6 +2,7 @@
 
 import fs from "node:fs/promises";
 import { createWriteStream } from "node:fs";
+import { Readable } from "node:stream";
 
 const imgpath = "demo/w3c/img";
 
@@ -24,21 +25,6 @@ function download(jpg) {
         .then(response => {
             if (!response.ok)
                 throw new Error(`Failed ${jpg}: ${response.status}`);
-            response.body.pipeTo(createWritableStream(jpg));
-        });
-}
-
-function createWritableStream(jpg) {
-    const jpgwriter = createWriteStream(jpg);
-    return new WritableStream({
-            write(chunk) {
-                jpgwriter.write(chunk);
-            },
-            close() {
-                jpgwriter.end();
-            },
-            abort(err) {
-                jpgwriter.destroy(err);
-            }
+            Readable.fromWeb(response.body).pipe(createWriteStream(jpg));
         });
 }
