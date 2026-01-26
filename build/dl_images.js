@@ -21,10 +21,10 @@ fs.mkdir(imgpath, { recursive: true })
     .catch(console.error);
 
 function download(jpg) {
-    return fetch(`https://i.imgur.com/${jpg}`)
-        .then(response => {
-            if (!response.ok)
-                throw new Error(`Failed ${jpg}: ${response.status}`);
-            Readable.fromWeb(response.body).pipe(createWriteStream(jpg));
+    fetch(`https://i.imgur.com/${jpg}`)
+        .then(({ ok, status, body }) => {
+            if (!ok)
+                throw new Error(`Failed ${jpg}: ${status}`);
+            Readable.fromWeb(body).pipe(createWriteStream(jpg));
         });
 }
