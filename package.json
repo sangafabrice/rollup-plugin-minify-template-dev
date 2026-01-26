@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "download:images": "dl-img",
+    "devtools:gen": "devtools-gen",
     "vscode:settings": "settings",
     "commit:lib": "commit-lib",
     "commit:src": "commit-lib --only src",

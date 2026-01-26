@@ -15,7 +15,7 @@ code --install-extension ms-vscode.live-server
 ```
 ### 4. Generate devtools config to open the project in browser Source pane:
 ```bash
-npx --yes devtools-json-generator demo/w3c/
+npm run devtools:gen
 ```
 ### 5. Download images for demo and build self-contained web component:
 ```bash

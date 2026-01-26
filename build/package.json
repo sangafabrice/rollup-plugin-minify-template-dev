@@ -10,6 +10,7 @@
     "demo-alt": "demo_alt.js",
     "settings": "settings.js",
     "dl-img": "dl_images.js",
+    "devtools-gen": "devtools_gen.ps1",
     "flowstop": "flowstop.js",
     "push": "push.js",
     "transform": "transform.js",
