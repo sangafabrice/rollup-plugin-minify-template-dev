@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from "node:fs/promises";
+import { createWriteStream } from "node:fs";
 
 const imgpath = "demo/w3c/img";
 
@@ -23,9 +24,21 @@ function download(jpg) {
         .then(response => {
             if (!response.ok)
                 throw new Error(`Failed ${jpg}: ${response.status}`);
-            return response.blob();
-        })
-        .then(blob => blob.arrayBuffer())
-        .then(Buffer.from)
-        .then(fs.writeFile.bind(fs, jpg));
+            response.body.pipeTo(createWritableStream(jpg));
+        });
+}
+
+function createWritableStream(jpg) {
+    const jpgwriter = createWriteStream(jpg);
+    return new WritableStream({
+            write(chunk) {
+                jpgwriter.write(chunk);
+            },
+            close() {
+                jpgwriter.end();
+            },
+            abort(err) {
+                jpgwriter.destroy(err);
+            }
+        });
 }
