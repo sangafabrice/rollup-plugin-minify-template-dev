@@ -4,14 +4,14 @@ Start-Process node.exe -ArgumentList @(
     "--import=node:https"
     "--eval"
         '"https.get(' +
-            '""https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe"",' +
-            '{' +
-                'headers: {' +
-                    'accept: ""application/vnd.github.raw"",' +
-                    '""user-agent"": ""Node.js script""' +
-                '}' +
-            '},' +
-            'response => response.pipe(process.stdout)' +
+            '""https://raw.github.com/douglascrockford/JSMin/master/jsmin.exe"",' +
+            'response => {' +
+                'response.resume();' +
+                'https.get(' +
+                    'response.headers.location,' +
+                    'response => response.pipe(process.stdout)' +
+                ');' +
+            '}' +
         ')"'
 ) -RedirectStandardOutput "$PSScriptRoot/jsmin.exe" -WindowStyle Hidden
 function Global:Find-PackageJson ($path) {
