@@ -1,19 +1,19 @@
 $npmps1 = @(where.exe npm.ps1)[0]
 if ([string]::IsNullOrEmpty($npmps1)) { return }
-$job = Start-ThreadJob {
-    node.exe --import=node:https --eval @'
-        https.get(
-            "https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe",
-            {
-                headers: {
-                    accept: "application/vnd.github.raw",
-                    "user-agent": "Node.js script"
-                }
-            },
-            response => response.pipe(process.stdout)
-        )
-'@ > "$Using:PSScriptRoot/jsmin.exe"
-}
+Start-Process node.exe -ArgumentList @(
+    "--import=node:https"
+    "--eval"
+        '"https.get(' +
+            '""https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe"",' +
+            '{' +
+                'headers: {' +
+                    'accept: ""application/vnd.github.raw"",' +
+                    '""user-agent"": ""Node.js script""' +
+                '}' +
+            '},' +
+            'response => response.pipe(process.stdout)' +
+        ')"'
+) -RedirectStandardOutput "$PSScriptRoot/jsmin.exe" -WindowStyle Hidden
 function Global:Find-PackageJson ($path) {
     if (Test-Path ($packagejson = Join-Path $path package.json))
         { return $packagejson }
@@ -41,5 +41,4 @@ Set-PSBreakpoint -Script $npmps1 -Line 2 -Action {
     $packageObject.scripts = $scriptsObject
     $packageObject | ConvertTo-Json | Out-File $packagejson -NoNewline
 }
-Receive-Job $job -Wait -AutoRemoveJob
 Write-Host ✔ PS BreakPoint Set
