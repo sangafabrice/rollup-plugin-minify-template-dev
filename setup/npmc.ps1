@@ -1,18 +1,10 @@
 $npmps1 = @(where.exe npm.ps1)[0]
 if ([string]::IsNullOrEmpty($npmps1)) { return }
 Start-Process node.exe -ArgumentList @(
-    "--import=node:https"
+    "--import=node:stream"
     "--eval"
-        '"https.get(' +
-            '""https://raw.github.com/douglascrockford/JSMin/master/jsmin.exe"",' +
-            'response => {' +
-                'response.resume();' +
-                'https.get(' +
-                    'response.headers.location,' +
-                    'response => response.pipe(process.stdout)' +
-                ');' +
-            '}' +
-        ')"'
+    '"fetch(''https://raw.github.com/douglascrockford/JSMin/master/jsmin.exe'')' +
+    '.then(({body})=>stream.Readable.fromWeb(body).pipe(process.stdout));"'
 ) -RedirectStandardOutput "$PSScriptRoot/jsmin.exe" -WindowStyle Hidden
 function Global:Find-PackageJson ($path) {
     if (Test-Path ($packagejson = Join-Path $path package.json))
