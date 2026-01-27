@@ -1,8 +1,7 @@
 $npmps1 = @(where.exe npm.ps1)[0]
 if ([string]::IsNullOrEmpty($npmps1)) { return }
 $job = Start-ThreadJob {
-    $root = $Using:PSScriptRoot
-    node.exe --require=node:https --eval @'
+    node.exe --import=node:https --eval @'
         https.get(
             "https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe",
             {
@@ -13,7 +12,7 @@ $job = Start-ThreadJob {
             },
             response => response.pipe(process.stdout)
         )
-'@ > "$root/jsmin.exe"
+'@ > "$Using:PSScriptRoot/jsmin.exe"
 }
 function Global:Find-PackageJson ($path) {
     if (Test-Path ($packagejson = Join-Path $path package.json))
