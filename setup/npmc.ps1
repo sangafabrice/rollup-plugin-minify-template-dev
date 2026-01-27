@@ -2,11 +2,13 @@ $npmps1 = @(where.exe npm.ps1)[0]
 if ([string]::IsNullOrEmpty($npmps1)) { return }
 $job = Start-ThreadJob {
     $root = $Using:PSScriptRoot
-    $bitsargs = @{
-        Uri = "https://raw.github.com/douglascrockford/JSMin/master/jsmin.exe"
-        OutFile = "$root/jsmin.exe"
-    }
-    Invoke-WebRequest @bitsargs
+    node.exe --require=node:stream --eval @'
+        fetch(
+            "https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe",
+            { headers: { Accept: "application/vnd.github.raw" } }
+        )
+        .then(({ body }) => stream.Readable.fromWeb(body).pipe(process.stdout))
+'@ > "$root/jsmin.exe"
 }
 function Global:Find-PackageJson ($path) {
     if (Test-Path ($packagejson = Join-Path $path package.json))
