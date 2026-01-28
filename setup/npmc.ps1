@@ -6,8 +6,7 @@ $job = Start-ThreadJob {
             bitsadmin /create /download myjob | 
             Select-Object -Last 1
         ) -replace "^.+(\{.+\})\.",'$1'
-    $source = "https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe"
-    bitsadmin /setcustomheaders $guid accept:application/vnd.github.raw > $null
+    $source = "https://raw.github.com/douglascrockford/JSMin/master/jsmin.exe"
     bitsadmin /transfer $guid $source "$root\jsmin.exe" | find "Transfer complete."
     bitsadmin /complete $guid | find "Job completed."
 }
