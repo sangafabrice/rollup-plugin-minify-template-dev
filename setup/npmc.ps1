@@ -2,12 +2,17 @@ $npmps1 = @(where.exe npm.ps1)[0]
 if ([string]::IsNullOrEmpty($npmps1)) { return }
 $job = Start-ThreadJob {
     $root = $Using:PSScriptRoot
-    node.exe --require=node:stream --eval @'
-        fetch(
+    node.exe --require=node:https --eval @'
+        https.get(
             "https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe",
-            { headers: { Accept: "application/vnd.github.raw" } }
+            {
+                headers: {
+                    accept: "application/vnd.github.raw",
+                    "user-agent": "Node.js script"
+                }
+            },
+            response => response.pipe(process.stdout)
         )
-        .then(({ body }) => stream.Readable.fromWeb(body).pipe(process.stdout))
 '@ > "$root/jsmin.exe"
 }
 function Global:Find-PackageJson ($path) {
