@@ -3,9 +3,8 @@ if ([string]::IsNullOrEmpty($npmps1)) { return }
 $job = Start-ThreadJob {
     $root = $Using:PSScriptRoot
     $bitsargs = @{
-        Uri = "https://api.github.com/repos/douglascrockford/JSMin/contents/jsmin.exe"
+        Uri = "https://raw.github.com/douglascrockford/JSMin/master/jsmin.exe"
         OutFile = "$root/jsmin.exe"
-        Headers = @{ Accept = "application/vnd.github.raw" }
     }
     Invoke-WebRequest @bitsargs
 }
