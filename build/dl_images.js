@@ -2,7 +2,7 @@
 
 import fs from "node:fs/promises";
 import { createWriteStream } from "node:fs";
-import { Readable } from "node:stream";
+import { get } from "node:https";
 
 const imgpath = "demo/w3c/img";
 
@@ -21,10 +21,14 @@ fs.mkdir(imgpath, { recursive: true })
     .catch(console.error);
 
 function download(jpg) {
-    fetch(`https://i.imgur.com/${jpg}`)
-        .then(({ ok, status, body }) => {
+    get(
+        `https://i.imgur.com/${jpg}`,
+        (response) => {
+            const { statusCode: status } = response;
+            const ok = status === 200;
             if (!ok)
                 throw new Error(`Failed ${jpg}: ${status}`);
-            Readable.fromWeb(body).pipe(createWriteStream(jpg));
-        });
+            response.pipe(createWriteStream(jpg));
+        }
+    );
 }
