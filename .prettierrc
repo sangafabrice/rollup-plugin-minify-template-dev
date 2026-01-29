@@ -1,0 +1,30 @@
+{
+  "endOfLine": "lf",
+  "trailingComma": "none",
+  "arrowParens": "avoid",
+  "bracketSameLine": false,
+  "experimentalOperatorPosition": "end",
+  "htmlWhitespaceSensitivity": "strict",
+  "objectWrap": "collapse",
+  "printWidth": 60,
+  "singleAttributePerLine": true,
+  "tabWidth": 4,
+  "overrides": [
+    {
+      "files": [
+        "**/*.json",
+        "**/.prettierrc"
+      ],
+      "options": {
+        "printWidth": 30,
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "demo/rollup.config.cjs",
+      "options": {
+        "parser": "flow"
+      }
+    }
+  ]
+}

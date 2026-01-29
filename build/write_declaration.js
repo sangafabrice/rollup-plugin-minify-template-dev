@@ -36,7 +36,8 @@ function collectTypeAliases(ast) {
             const { node, parentPath } = path;
             aliases.set(node.id.name, {
                 node,
-                exported: parentPath.isExportNamedDeclaration()
+                exported:
+                    parentPath.isExportNamedDeclaration()
             });
         }
     });
@@ -59,23 +60,29 @@ function extractPublicAPI(ast) {
 
     traverse(ast, {
         Program(path) {
-            api.hasFlow = /@flow/.test(path.node.body[0].leadingComments[0].value);
+            api.hasFlow = /@flow/.test(
+                path.node.body[0].leadingComments[0].value
+            );
         },
 
         ImportDeclaration(path) {
             const { node } = path;
-            if (node.importKind == "type") api.typeImports.push(node);
+            if (node.importKind == "type")
+                api.typeImports.push(node);
         },
 
         ExportNamedDeclaration(path) {
             const { node } = path;
-            const { declaration, exportKind  } = node;
-            if (exportKind == "type" && !declaration) api.typeReExports.push(node);
-            if (t.isTypeAlias(declaration)) api.exportedTypes.push(declaration);
+            const { declaration, exportKind } = node;
+            if (exportKind == "type" && !declaration)
+                api.typeReExports.push(node);
+            if (t.isTypeAlias(declaration))
+                api.exportedTypes.push(declaration);
         },
 
         ExportDefaultDeclaration(path) {
-            const { declaration, leadingComments } = path.node;
+            const { declaration, leadingComments } =
+                path.node;
             if (t.isFunctionDeclaration(declaration))
                 api.defaultExport = {
                     fn: declaration,
@@ -94,30 +101,46 @@ function extractPublicAPI(ast) {
 function resolveType(node, aliases, stack = new Set()) {
     switch (node?.type) {
         case "GenericTypeAnnotation": {
-            const { type, qualification, id, name: nodename } = node.id;
-            const name = type === "QualifiedTypeIdentifier"
-                ? `${qualification.name}.${id.name}`
-                : nodename;
+            const {
+                type,
+                qualification,
+                id,
+                name: nodename
+            } = node.id;
+            const name =
+                type === "QualifiedTypeIdentifier"
+                    ? `${qualification.name}.${id.name}`
+                    : nodename;
             const { typeParameters } = node;
             const typeParams = typeParameters
                 ? `<${typeParameters.params.map(p => resolveType(p, aliases, stack)).join(", ")}>`
                 : "";
             const alias = aliases.get(name);
 
-            if (!alias || alias.exported || stack.has(name)) return `${name}${typeParams}`;
+            if (!alias || alias.exported || stack.has(name))
+                return `${name}${typeParams}`;
 
             stack.add(name);
 
-            return resolveType(alias.node.right, aliases, stack);
+            return resolveType(
+                alias.node.right,
+                aliases,
+                stack
+            );
         }
 
         case "UnionTypeAnnotation":
-            return node.types.map(t => resolveType(t, aliases, stack)).join(" | ");
+            return node.types
+                .map(t => resolveType(t, aliases, stack))
+                .join(" | ");
 
         case "ObjectTypeAnnotation":
-            return `{ ${node.properties.map(p =>
-                    `${p.key.name}${p.optional ? "?" : ""}: ${resolveType(p.value, aliases, stack)}`
-                ).join(", ")} }`;
+            return `{ ${node.properties
+                .map(
+                    p =>
+                        `${p.key.name}${p.optional ? "?" : ""}: ${resolveType(p.value, aliases, stack)}`
+                )
+                .join(", ")} }`;
 
         case "ArrayTypeAnnotation":
             return `Array<${resolveType(node.elementType, aliases, stack)}>`;
@@ -132,13 +155,17 @@ function resolveType(node, aliases, stack = new Set()) {
 
 function printTypeImport(node) {
     const { specifiers, source } = node;
-    const names = specifiers.map(s => s.imported.name).join(", ");
+    const names = specifiers
+        .map(s => s.imported.name)
+        .join(", ");
     return `import type { ${names} } from "${source.value}";`;
 }
 
 function printTypeReExport(node) {
     const { specifiers, source } = node;
-    const names = specifiers.map(s => s.exported.name).join(", ");
+    const names = specifiers
+        .map(s => s.exported.name)
+        .join(", ");
     return `export type { ${names} } from "${source.value}";`;
 }
 
@@ -148,11 +175,17 @@ function printExportedType(alias, aliases) {
 
 function printParam(param, aliases) {
     if (t.isAssignmentPattern(param))
-        return printParam(param.left, aliases).replace(/(\w+)(\??):/, "$1?:");
+        return printParam(param.left, aliases).replace(
+            /(\w+)(\??):/,
+            "$1?:"
+        );
 
     if (t.isIdentifier(param)) {
         const type = param.typeAnnotation
-            ? resolveType(param.typeAnnotation.typeAnnotation, aliases)
+            ? resolveType(
+                  param.typeAnnotation.typeAnnotation,
+                  aliases
+              )
             : "any";
         return `${param.name}${param.optional ? "?" : ""}: ${type}`;
     }
@@ -161,13 +194,19 @@ function printParam(param, aliases) {
 }
 
 function printDefaultExport(fn, jsdoc, aliases) {
-    const doc = jsdoc?.map(c => `/**${c.value}*/`).join("\n") ?? "";
-    const params = fn.params.map(p => printParam(p, aliases)).join(", ");
+    const doc =
+        jsdoc?.map(c => `/**${c.value}*/`).join("\n") ?? "";
+    const params = fn.params
+        .map(p => printParam(p, aliases))
+        .join(", ");
     const returnType = fn.returnType
         ? resolveType(fn.returnType.typeAnnotation, aliases)
         : "any";
 
-    return `${doc}\ndeclare export default function ${fn.id.name}(${params}): ${returnType}`.trim() + ";";
+    return (
+        `${doc}\ndeclare export default function ${fn.id.name}(${params}): ${returnType}`.trim() +
+        ";"
+    );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -178,12 +217,27 @@ function buildFlowDeclaration(ast) {
     const api = extractPublicAPI(ast);
     const aliases = collectTypeAliases(ast);
     const out = [];
-    const { hasFlow, typeImports, typeReExports, exportedTypes, defaultExport: { fn, jsdoc } } = api;
+    const {
+        hasFlow,
+        typeImports,
+        typeReExports,
+        exportedTypes,
+        defaultExport: { fn, jsdoc }
+    } = api;
 
     if (hasFlow) out.push("/** @flow */", "");
 
-    out.push(...typeImports.map(printTypeImport), ...typeReExports.map(printTypeReExport), "");
-    out.push(...exportedTypes.map(t => printExportedType(t, aliases)), "");
+    out.push(
+        ...typeImports.map(printTypeImport),
+        ...typeReExports.map(printTypeReExport),
+        ""
+    );
+    out.push(
+        ...exportedTypes.map(t =>
+            printExportedType(t, aliases)
+        ),
+        ""
+    );
     out.push(printDefaultExport(fn, jsdoc, aliases));
 
     return out.join("\n");
@@ -196,7 +250,7 @@ function buildFlowDeclaration(ast) {
 fs.watchFile(mainScript, function () {
     if (!arguments.length)
         console.log(`The ${mainScript} watcher is ready.`);
-    
+
     const source = fs.readFileSync(mainScript, "utf8");
     const ast = parseFlow(source);
     const flow = buildFlowDeclaration(ast);

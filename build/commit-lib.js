@@ -8,19 +8,18 @@ const DIRS = ["lib", "src"];
 
 const { message, only } = yargs(hideBin(process.argv))
     .scriptName("commit-lib")
-    .command(
-        "$0 <message..>",
-        "Process a message",
-        yargs => yargs.positional("message", {
+    .command("$0 <message..>", "Process a message", yargs =>
+        yargs.positional("message", {
             describe: "Message text",
             type: "string"
         })
     )
     .option("only", {
-        describe: "Limit processing to a specific directory",
+        describe:
+            "Limit processing to a specific directory",
         type: "string",
         choices: [...DIRS, "demo/w3c/src"],
-        coerce: values => [ values ]
+        coerce: values => [values]
     })
     .check(argv => {
         const { message, _, only } = argv;

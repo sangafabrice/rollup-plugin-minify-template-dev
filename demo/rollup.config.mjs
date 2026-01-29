@@ -4,7 +4,7 @@ import babelrcPath from "build/babelrc";
 
 const require = createRequire(import.meta.url);
 require("@babel/register")({
-    only: [ /rollup\.config\.js$/ ],
+    only: [/rollup\.config\.js$/],
     cache: false,
     babelrc: false,
     configFile: babelrcPath

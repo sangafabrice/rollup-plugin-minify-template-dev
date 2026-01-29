@@ -9,7 +9,10 @@ const root = "demo/w3c";
 process.chdir(root);
 
 const devtoolsParent = ".well-known/appspecific";
-const configFile = path.join(devtoolsParent, "com.chrome.devtools.json");
+const configFile = path.join(
+    devtoolsParent,
+    "com.chrome.devtools.json"
+);
 
 fs.mkdir(devtoolsParent, { recursive: true })
     .then(() => {
@@ -22,5 +25,10 @@ fs.mkdir(devtoolsParent, { recursive: true })
         return JSON.stringify(config, null, 2);
     })
     .then(fs.writeFile.bind(fs, configFile))
-    .then(() => console.log("DevTools config written to: %s", configFile))
-    .catch(console.error);;
+    .then(() =>
+        console.log(
+            "DevTools config written to: %s",
+            configFile
+        )
+    )
+    .catch(console.error);

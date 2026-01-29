@@ -17,10 +17,7 @@ const { server } = yargs(hideBin(process.argv))
 
 process.chdir("demo/");
 
-const cliargs = { 
-    configNoServer: !server,
-    watch: true
-}
+const cliargs = { configNoServer: !server, watch: true };
 
 const configfile = resolve("./rollup.config.mjs");
 
@@ -28,13 +25,20 @@ loadConfigFile(configfile, cliargs, true)
     .then(({ options }) => options[0])
     .then(watch)
     .then(watcher =>
-        watcher.on("event", ({ code, input, output }) =>
-            code == "BUNDLE_END" &&
+        watcher.on(
+            "event",
+            ({ code, input, output }) =>
+                code == "BUNDLE_END" &&
                 console.log(
                     "%s → %j at %s\nWaiting for changes...",
                     input,
-                    output.map(bundle => relative(".", bundle)),
-                    new Date().toISOString().replace('T', ' ').split('.')[0]
+                    output.map(bundle =>
+                        relative(".", bundle)
+                    ),
+                    new Date()
+                        .toISOString()
+                        .replace("T", " ")
+                        .split(".")[0]
                 )
         )
     );

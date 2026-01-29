@@ -14,7 +14,7 @@ const { watch = false } = yargs(hideBin(process.argv))
 process.chdir("demo/");
 execSync(
     `babel-node ` +
-    `--config-file "${import.meta.dirname}/.babelrc" ` +
-    `${watch ? "--watch --watch-preserve-output":""} rollup.config.cjs`,
+        `--config-file "${import.meta.dirname}/.babelrc" ` +
+        `${watch ? "--watch --watch-preserve-output" : ""} rollup.config.cjs`,
     { stdio: "inherit" }
 );

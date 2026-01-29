@@ -12,4 +12,10 @@ const mainScript = "src/" + mainScriptName;
 const outputScript = "lib/" + mainScriptName;
 const outpkgConfig = "lib/" + pkgname;
 
-export { mainScriptName, mainScript, outputScript, outpkgConfig, pkgConfig };
+export {
+    mainScriptName,
+    mainScript,
+    outputScript,
+    outpkgConfig,
+    pkgConfig
+};

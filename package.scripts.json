@@ -1,4 +1,6 @@
 {
+  // Prettify scripts
+  "pretty": "prettifier",
   // Download the images
   // for the web component demo
   "download:images": "dl-img",

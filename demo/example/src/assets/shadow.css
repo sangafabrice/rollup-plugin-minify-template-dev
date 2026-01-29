@@ -1,12 +1,18 @@
 @keyframes pulse {
     0% {
-        background-color: color(var(--background-color) / .9);
+        background-color: color(
+            var(--background-color) / 0.9
+        );
     }
     50% {
-        background-color: color(var(--background-color) / 1);
+        background-color: color(
+            var(--background-color) / 1
+        );
     }
     100% {
-        background-color: color(var(--background-color) / .9);
+        background-color: color(
+            var(--background-color) / 0.9
+        );
     }
 }
 
@@ -17,8 +23,12 @@
 }
 
 :host {
-    --transparent: linear-gradient(transparent, transparent);
-    background-image: var(--yt-thumbnail-url-maxres, var(--transparent)),
+    --transparent: linear-gradient(
+        transparent,
+        transparent
+    );
+    background-image:
+        var(--yt-thumbnail-url-maxres, var(--transparent)),
         var(--yt-thumbnail-url-sd, var(--transparent)),
         var(--yt-thumbnail-url-hq, var(--transparent));
     background-position: center center;
@@ -34,7 +44,11 @@
     position: relative;
 
     &::before {
-        background: no-repeat center/cover var(--yt-thumbnail-url-previous, var(--transparent));
+        background: no-repeat center/cover
+            var(
+                --yt-thumbnail-url-previous,
+                var(--transparent)
+            );
         background-color: transparent;
         content: "";
         filter: blur(1px);
@@ -96,4 +110,4 @@ svg,
     ::slotted(svg) {
         --play-control-size: 1.5rem;
     }
-} 
+}

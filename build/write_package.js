@@ -11,9 +11,10 @@ watchFile(pkgConfig, function () {
         JSON.stringify(
             getpkg(),
             (key, value) => {
-                if (key != "scripts") return key == "name"
-                    ? value.slice(0, - "src".length - 1)
-                    : value
+                if (key != "scripts")
+                    return key == "name"
+                        ? value.slice(0, -"src".length - 1)
+                        : value;
             },
             2
         )
