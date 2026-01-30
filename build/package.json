@@ -12,7 +12,7 @@
     "dl-img": "dl_images.js",
     "devtools-gen": "devtools_gen.js",
     "flowstop": "flowstop.js",
-    "prettifier": "pretty.ps1",
+    "prettifier": "pretty.js",
     "push": "push.js",
     "transform": "transform.js",
     "watch-photo-demo": "watch_photo_demo.js",
