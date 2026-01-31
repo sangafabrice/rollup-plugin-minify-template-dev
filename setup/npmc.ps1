@@ -9,6 +9,6 @@ Set-PSBreakpoint -Script $npmps1 -Line 2 -Action {
         )
     ) { return }
     $node = $Script:PSCommandPath -replace 'npm\.ps1$',"node.exe"
-    & $node "$PSScriptRoot/npmc.js" 2>&1 | Out-Host
+    Get-Content "$PSScriptRoot/npmc.js" -Raw | & $node 2>&1 | Out-Host
 }
 Write-Host ✔ PS BreakPoint Set
