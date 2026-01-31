@@ -18,7 +18,7 @@
   // Push to GitHub the super and sub projects
   "push": "push",
   // Project setup from the initial install command
-  "preinstall": "Get-Content setup/index.js -Raw | node --input-type=commonjs",
+  "preinstall": "Get-Content setup/index.js -Raw | node",
   "postinstall": "settings",
   // Stop the flow-typed LSP and processes
   "flow:stop": "flowstop",

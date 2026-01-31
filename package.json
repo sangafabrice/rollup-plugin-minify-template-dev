@@ -12,7 +12,7 @@
     "commit:src": "commit-lib --only src",
     "commit:w3c": "commit-lib --only demo/w3c/src",
     "push": "push",
-    "preinstall": "Get-Content setup/index.js -Raw | node --input-type=commonjs",
+    "preinstall": "Get-Content setup/index.js -Raw | node",
     "postinstall": "settings",
     "flow:stop": "flowstop",
     "watch:alt": "demo-alt --watch",
