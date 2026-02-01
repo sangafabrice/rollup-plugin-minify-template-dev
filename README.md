@@ -15,11 +15,12 @@ npm install --global npm-check-updates
 npm install
 ```
 
-### 3. Install Live Preview and Prettier on VS Code:
+### 3. Install Live Preview, Prettier, and ESLint on VS Code:
 
 ```bash
 code --install-extension ms-vscode.live-server
 code --install-extension esbenp.prettier-vscode
+code --install-extension dbaeumer.vscode-eslint
 ```
 
 ### 4. Generate devtools config to open the project in browser Source pane:

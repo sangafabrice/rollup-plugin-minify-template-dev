@@ -4,6 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "pretty": "prettifier",
     "download:images": "dl-img",
     "devtools:gen": "devtools-gen",
@@ -31,8 +33,13 @@
     "src"
   ],
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "babel-plugin-syntax-hermes-parser": "^0.33.3",
+    "eslint": "^9.39.2",
+    "eslint-plugin-ft-flow": "^3.0.11",
     "flow-bin": "^0.299.0",
+    "globals": "^17.2.0",
+    "hermes-eslint": "^0.33.3",
     "prettier": "3.8.1",
     "rollup-plugin-minify-template": "file:lib"
   }
