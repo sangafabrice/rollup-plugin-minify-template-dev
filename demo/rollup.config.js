@@ -1,17 +1,15 @@
+/* eslint-disable no-duplicate-imports */
 /** @flow */
-import { string } from "rollup-plugin-string";
-import minifyTemplate from "rollup-plugin-minify-template";
-import { babel } from "@rollup/plugin-babel";
-import { nodeResolve } from "@rollup/plugin-node-resolve";
+import type { Config } from "config";
+import type { OptionExtension } from "rollup-plugin-minify-template";
 import { autoReload } from "rollup-plugin-auto-reload";
-import serve from "rollup-plugin-serve";
+import { babel } from "@rollup/plugin-babel";
 // $FlowFixMe[cannot-resolve-module]
 import configFile from "build/babelrc";
-import type {
-    OptionExtension,
-    Plugin
-} from "rollup-plugin-minify-template";
-import type { Config } from "config";
+import minifyTemplate from "rollup-plugin-minify-template";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import serve from "rollup-plugin-serve";
+import { string } from "rollup-plugin-string";
 
 // $FlowFixMe[unsafe-addition]
 // $FlowFixMe[cannot-resolve-name]

@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
-import { transformFileSync } from "@babel/core";
-import { writeFileSync, watchFile } from "node:fs";
-import { join } from "node:path";
 import { mainScript, outputScript } from "./main.js";
+import { watchFile, writeFileSync } from "node:fs";
 import configFile from "build/babelrc";
+import { transformFileSync } from "@babel/core";
 
 watchFile(mainScript, function () {
     if (!arguments.length)

@@ -43,6 +43,7 @@ function execute(command) {
     try {
         return execSync(command).toString().trim();
     } catch (error) {
+        console.log(error.message);
         return "";
     }
 }

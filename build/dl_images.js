@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import fs from "node:fs/promises";
 import { createWriteStream } from "node:fs";
+import fs from "node:fs/promises";
 import { get } from "node:https";
 
 const imgpath = "demo/w3c/img";

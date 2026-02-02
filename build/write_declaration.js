@@ -4,11 +4,11 @@
  * @fileoverview
  * Emit a .js.flow declaration file from a Flow-typed JS source.
  */
+import * as t from "@babel/types";
+import { mainScript, outputScript } from "./main.js";
+import { createRequire } from "node:module";
 import fs from "node:fs";
 import { parse } from "@babel/parser";
-import * as t from "@babel/types";
-import { createRequire } from "node:module";
-import { mainScript, outputScript } from "./main.js";
 
 const require = createRequire(import.meta.url);
 const traverse = require("@babel/traverse").default;

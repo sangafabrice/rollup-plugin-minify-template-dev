@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
-import crypto from "node:crypto";
 
 const root = "demo/w3c";
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { glob, copyFile, rm } from "node:fs/promises";
+import { copyFile, glob, rm } from "node:fs/promises";
 import { basename } from "node:path";
 
 removeItem("lib/*")

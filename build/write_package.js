@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import getpkg, { outpkgConfig, pkgConfig } from "./main.js";
-import { writeFileSync, watchFile } from "node:fs";
+import { watchFile, writeFileSync } from "node:fs";
 
 watchFile(pkgConfig, function () {
     if (!arguments.length)

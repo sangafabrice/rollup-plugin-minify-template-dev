@@ -25,7 +25,11 @@ for await (const filepath of fs.glob(
                     Object.assign(config, { filepath })
                 )
         )
-        .then(formatted => formatted.trim())
+        .then(
+            String.prototype.trim.call.bind(
+                String.prototype.trim
+            )
+        )
         .then(fs.writeFile.bind(fs, filepath))
         .then(() => console.log(`✔ formatted ${filepath}`))
         .catch(err =>

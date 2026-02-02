@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import jsonc from "comment-json";
 import fs from "node:fs/promises";
+import jsonc from "comment-json";
 
 const vscodedir = ".vscode";
 const settingsFile = vscodedir + "/settings.json";

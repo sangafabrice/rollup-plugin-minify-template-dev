@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { execSync } from "node:child_process";
-import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
+import yargs from "yargs";
 
 const { watch = false } = yargs(hideBin(process.argv))
     .scriptName("demo")

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
+import { rmSync, watchFile } from "node:fs";
 import { loadConfigFile } from "rollup/loadConfigFile";
-import { rollup } from "rollup";
-import { watchFile, rmSync } from "node:fs";
 import { resolve } from "node:path";
+import { rollup } from "rollup";
 
 process.chdir("demo/");
 

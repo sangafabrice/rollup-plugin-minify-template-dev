@@ -1,6 +1,5 @@
-import { createRequire } from "node:module";
-import { join } from "node:path";
 import babelrcPath from "build/babelrc";
+import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
 require("@babel/register")({

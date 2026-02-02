@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { loadConfigFile } from "rollup/loadConfigFile";
-import { rollup, watch } from "rollup";
-import { resolve, relative } from "node:path";
-import yargs from "yargs";
+import { relative, resolve } from "node:path";
 import { hideBin } from "yargs/helpers";
+import { loadConfigFile } from "rollup/loadConfigFile";
+import { watch } from "rollup";
+import yargs from "yargs";
 
 const { server } = yargs(hideBin(process.argv))
     .scriptName("start")
