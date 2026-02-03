@@ -1,10 +1,31 @@
+import css from "@eslint/css";
 import { defineConfig } from "eslint/config";
 import ftFlow from "eslint-plugin-ft-flow";
 import globals from "globals";
 import hermes from "hermes-eslint";
+import html from "@html-eslint/eslint-plugin";
 import js from "@eslint/js";
 
 export default defineConfig([
+    {
+        files: ["**/*.css"],
+        language: "css/css",
+        plugins: { css },
+        extends: ["css/recommended"]
+    },
+    {
+        files: ["**/*.html"],
+        plugins: { html },
+        extends: ["html/recommended"],
+        language: "html/html",
+        rules: {
+            "html/indent": "off",
+            "html/require-closing-tags": [
+                "warn",
+                { selfClosing: "always" }
+            ]
+        }
+    },
     {
         files: ["**/*.{js,mjs,cjs}"],
         ignores: ["**/lib/*", "**/dist/*"],
@@ -33,10 +54,6 @@ export default defineConfig([
         }
     },
     {
-        files: ["**/*.cjs"],
-        languageOptions: { sourceType: "script" }
-    },
-    {
         linterOptions: {
             reportUnusedDisableDirectives: "warn"
         }
@@ -44,7 +61,10 @@ export default defineConfig([
     {
         files: ["{@flowtyped,demo,src}/**/*.{js,cjs,flow}"],
         ignores: ["**/package.js"],
-        languageOptions: { parser: hermes },
+        languageOptions: {
+            sourceType: "module",
+            parser: hermes
+        },
         plugins: { "ft-flow": ftFlow },
         rules: {
             "ft-flow/array-style-complex-type": "warn",

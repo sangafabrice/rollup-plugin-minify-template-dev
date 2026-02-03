@@ -1,9 +1,6 @@
-/* eslint-disable no-undef */
 /** @flow */
-/*::
 import type { Config } from "config";
 import type { OptionExtension } from "rollup-plugin-minify-template";
-*/
 const { string } = require("rollup-plugin-string");
 const {
     default: minifyTemplate
@@ -29,6 +26,7 @@ const plugins = [
     stringPlugin
 ];
 
+// eslint-disable-next-line no-undef
 const extensions: ReadonlyArray<OptionExtension> = [
     ".html",
     [".css"],

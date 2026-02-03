@@ -1,4 +1,6 @@
+/* eslint-disable css/use-baseline */
 @keyframes pulse {
+    /* eslint-disable css/no-invalid-properties */
     0% {
         background-color: color(
             var(--background-color) / 0.9
@@ -14,6 +16,7 @@
             var(--background-color) / 0.9
         );
     }
+    /* eslint-enable css/no-invalid-properties */
 }
 
 *,
