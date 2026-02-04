@@ -5,29 +5,21 @@ import htmlconfig from "./eslint/html.eslintrc.js";
 import jsconfig from "./eslint/js.eslintrc.js";
 
 export default defineConfig([
-    // prettier-ignore
-    {
-        files: ["**/*.css"],
-        extends: [cssconfig]
-    },
-    // prettier-ignore
-    {
-        files: ["**/*.html"],
-        extends: [htmlconfig]
-    },
+    { files: ["**/*.css"], extends: [cssconfig] },
+    { files: ["**/*.html"], extends: [htmlconfig] },
     {
         files: ["**/*.{js,mjs,cjs}"],
         ignores: ["**/{lib,dist}/*"],
         extends: [jsconfig]
     },
     {
-        linterOptions: {
-            reportUnusedDisableDirectives: "warn"
-        }
-    },
-    {
         files: ["{@flowtyped,demo,src}/**/*.{js,cjs,flow}"],
         ignores: ["**/package.js"],
         extends: [flowconfig]
+    },
+    {
+        linterOptions: {
+            reportUnusedDisableDirectives: "warn"
+        }
     }
 ]);
