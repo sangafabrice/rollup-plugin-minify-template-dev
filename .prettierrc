@@ -21,7 +21,7 @@
       }
     },
     {
-      "files": "demo/rollup.config.cjs",
+      "files": ["demo/rollup.config.cjs", "@flowtyped/**/*.flow"],
       "options": {
         "parser": "flow"
       }

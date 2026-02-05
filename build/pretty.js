@@ -4,7 +4,7 @@ import fs from "node:fs/promises";
 import prettier from "prettier";
 
 for await (const filepath of fs.glob(
-    "**/*.{js,cjs,mjs,html,css,json}",
+    "**/*.{js,cjs,mjs,html,css,json,flow}",
     {
         exclude: [
             "node_modules/**",
