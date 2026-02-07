@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "type": "msedge",
+            "name": "HTTP server",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/"
+        },
+        {
+            "type": "msedge",
+            "name": "No Server Launch",
+            "request": "launch",
+            "file": "${workspaceFolder}/demo/w3c/index.html"
+        }
+    ]
+}
