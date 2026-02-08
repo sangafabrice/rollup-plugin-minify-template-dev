@@ -2,9 +2,11 @@
 import type { Config } from "config";
 import type { OptionExtension } from "rollup-plugin-minify-template";
 const { string } = require("rollup-plugin-string");
-const {
+/*:: const {
     default: minifyTemplate
-} = require("rollup-plugin-minify-template");
+} = require("rollup-plugin-minify-template"); */
+// $FlowFixMe[name-already-bound]
+const minifyTemplate = require("rollup-plugin-minify-template");
 const { babel } = require("@rollup/plugin-babel");
 // $FlowFixMe[cannot-resolve-module]
 const configFile = require("build/babelrc");

@@ -6,6 +6,7 @@
   "bin": {
     "build": "build.js",
     "commit-lib": "commit-lib.js",
+    "commonizer": "commonize.ps1",
     "demo": "demo.js",
     "demo-alt": "demo_alt.js",
     "settings": "settings.js",
@@ -23,7 +24,8 @@
     "./babelrc": {
       "import": "./get_babelrc.js",
       "require": "./get_babelrc.cjs"
-    }
+    },
+    "./commonjs/babelrc": "./babel.config.json"
   },
   "scripts": {},
   "keywords": [],
@@ -34,9 +36,11 @@
     "@babel/cli": "^7.28.6",
     "@babel/core": "^7.29.0",
     "@babel/node": "^7.29.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.28.6",
     "@babel/preset-flow": "^7.27.1",
     "@rollup/plugin-babel": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
+    "babel-plugin-add-module-exports": "^1.0.4",
     "comment-json": "^4.5.1",
     "find-process": "^2.0.0",
     "rollup-plugin-auto-reload": "^1.1.0",

@@ -9,7 +9,7 @@ const ncu = require("npm-check-updates");
 ncu.run({
     upgrade: true,
     workspaces: true,
-    reject: "prettier"
+    reject: ["prettier", "eslint"]
 })
     .then(console.log)
     .then(() => {
