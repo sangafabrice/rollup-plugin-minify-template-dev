@@ -10,12 +10,17 @@ const pkg = getpkg();
 const mainScriptName = pkg.main;
 const mainScript = "src/" + mainScriptName;
 const outputScript = "lib/" + mainScriptName;
+const outputCjsScript = outputScript.replace(
+    /\.js$/i,
+    ".cjs"
+);
 const outpkgConfig = "lib/" + pkgname;
 
 export {
     mainScriptName,
     mainScript,
     outputScript,
+    outputCjsScript,
     outpkgConfig,
     pkgConfig
 };

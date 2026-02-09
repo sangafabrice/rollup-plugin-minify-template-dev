@@ -50,9 +50,8 @@ const configsToConcat = extensions.map((extensions, i) => {
     return config(`dist/example-${i + 1}.js`);
 });
 
-const options = configs.concat(
-    configsToConcat
-) as Array<Config>;
+const options: Array<Config> =
+    configs.concat(configsToConcat);
 
 module.exports = options;
 

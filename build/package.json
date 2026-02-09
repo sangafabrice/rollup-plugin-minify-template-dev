@@ -6,7 +6,6 @@
   "bin": {
     "build": "build.js",
     "commit-lib": "commit-lib.js",
-    "commonizer": "commonize.ps1",
     "demo": "demo.js",
     "demo-alt": "demo_alt.js",
     "settings": "settings.js",

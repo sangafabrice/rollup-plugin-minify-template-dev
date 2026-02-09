@@ -72,6 +72,13 @@ settingsText
             {
                 fileMatch: ["/.prettierrc"],
                 url: "https://www.schemastore.org/prettierrc.json"
+            },
+            {
+                fileMatch: [
+                    "/.babelrc",
+                    "/babel.config.json"
+                ],
+                url: "https://json.schemastore.org/babelrc.json"
             }
         ]);
 

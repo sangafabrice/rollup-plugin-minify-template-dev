@@ -1,19 +1,39 @@
 #!/usr/bin/env node
 
-import { mainScript, outputScript } from "./main.js";
-import { watchFile, writeFileSync } from "node:fs";
+import {
+    mainScript,
+    outputCjsScript,
+    outputScript
+} from "./main.js";
+import {
+    transformAsync,
+    transformFileAsync
+} from "@babel/core";
+import cjsOptions from "build/commonjs/babelrc" with { type: "json" };
 import configFile from "build/babelrc";
-import { transformFileSync } from "@babel/core";
+import fs from "node:fs/promises";
+import { watchFile } from "node:fs";
+
+const babelrc = false;
+const writeFile = (outscript, code) =>
+    fs
+        .writeFile(outscript, code)
+        .then(() => console.log("✔ emitted %s", outscript))
+        .catch(console.error);
 
 watchFile(mainScript, function () {
     if (!arguments.length)
         console.log(`The ${mainScript} watcher is ready.`);
-    writeFileSync(
-        outputScript,
-        transformFileSync(mainScript, {
-            babelrc: false,
-            configFile
-        }).code
-    );
-    console.log("✔ emitted " + outputScript);
+    transformFileAsync(mainScript, { babelrc, configFile })
+        .then(function ({ code }) {
+            writeFile(outputScript, code);
+            return transformAsync(code, {
+                babelrc,
+                ...cjsOptions
+            });
+        })
+        .then(({ code }) =>
+            writeFile(outputCjsScript, code)
+        )
+        .catch(console.error);
 }).emit("change");
