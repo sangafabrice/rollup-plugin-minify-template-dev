@@ -4,9 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "commonize": "commonizer",
     "lint": "eslint",
-    "lint:fix": "eslint --fix",
+    "lint:fix": "lint-fix",
     "pretty": "prettifier",
     "download:images": "dl-img",
     "devtools:gen": "devtools-gen",

@@ -1,7 +1,7 @@
 {
   // Linting flow-typed scripts
   "lint": "eslint",
-  "lint:fix": "eslint --fix",
+  "lint:fix": "lint-fix",
   // Prettify scripts
   "pretty": "prettifier",
   // Download the images

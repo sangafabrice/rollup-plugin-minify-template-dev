@@ -12,6 +12,7 @@
     "dl-img": "dl_images.js",
     "devtools-gen": "devtools_gen.js",
     "flowstop": "flowstop.js",
+    "lint-fix": "lint_fix.js",
     "prettifier": "pretty.js",
     "push": "push.js",
     "transform": "transform.js",
