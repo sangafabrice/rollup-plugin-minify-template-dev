@@ -2,9 +2,10 @@
 import type { Config } from "config";
 import type { OptionExtension } from "rollup-plugin-minify-template";
 const { string } = require("rollup-plugin-string");
-/*:: const {
-    default: minifyTemplate
-} = require("rollup-plugin-minify-template"); */
+const func =
+    require("rollup-plugin-minify-template")?.default;
+declare const minifyTemplate: typeof func;
+/* eslint-disable no-redeclare */
 // $FlowFixMe[name-already-bound]
 const minifyTemplate = require("rollup-plugin-minify-template");
 const { babel } = require("@rollup/plugin-babel");

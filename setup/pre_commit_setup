@@ -1,0 +1,18 @@
+#!/bin/bash
+
+HOOKNAME=pre-commit
+ROOTPATH=$(realpath ${BASH_SOURCE[0]} | xargs dirname)
+
+postsetup() {
+    PRECOMMITPATH=$(git rev-parse --git-dir)/hooks/$HOOKNAME
+    PRECOMMITSAMPLEPATH=$PRECOMMITPATH.sample
+    cat $1 > $PRECOMMITPATH && chmod u+x $PRECOMMITPATH && \
+    if [ -f "$PRECOMMITSAMPLEPATH" ]; then
+        rm -f "$PRECOMMITSAMPLEPATH"
+    fi
+}
+
+export -f postsetup
+export HOOKNAME
+
+find $ROOTPATH -maxdepth 1 -type f -name $HOOKNAME -exec bash -c 'postsetup "{}"' \;

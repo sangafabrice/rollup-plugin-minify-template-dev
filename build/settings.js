@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from "node:fs/promises";
+import { globSync } from "node:fs";
 import jsonc from "comment-json";
 
 const vscodedir = ".vscode";
@@ -81,6 +82,22 @@ settingsText
                 url: "https://json.schemastore.org/babelrc.json"
             }
         ]);
+        setSetting(
+            "files.exclude",
+            {
+                "**/.git": false,
+                "**/.git/hooks/*.sample": true,
+                ...globSync(".git/*", {
+                    exclude: [".git/hooks"]
+                }).reduce((obj, path) => {
+                    path = "**/" + path.replace("\\", "/");
+                    obj[path] = true;
+                    return obj;
+                }, {}),
+                "*/.git": true
+            },
+            "Required when setting up the Pre-Commit Git hook"
+        );
 
         return settingsText
             .then(detectIndent)

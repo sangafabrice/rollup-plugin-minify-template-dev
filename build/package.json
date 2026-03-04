@@ -5,6 +5,7 @@
   "main": "write_declaration.js",
   "bin": {
     "build": "build.js",
+    "build-once": "build_once.js",
     "commit-lib": "commit-lib.js",
     "demo": "demo.js",
     "demo-alt": "demo_alt.js",
@@ -41,11 +42,11 @@
     "@rollup/plugin-babel": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "babel-plugin-add-module-exports": "^1.0.4",
-    "comment-json": "^4.5.1",
-    "find-process": "^2.0.0",
+    "comment-json": "^4.6.2",
+    "find-process": "^2.1.0",
     "rollup-plugin-auto-reload": "^1.1.0",
     "rollup-plugin-serve": "^3.0.0",
-    "simple-git": "^3.32.2",
+    "simple-git": "^3.32.3",
     "yargs": "^18.0.0"
   }
 }

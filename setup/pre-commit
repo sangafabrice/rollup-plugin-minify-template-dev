@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if ! { npx prettifier && npx lint-fix; }; then
+    echo -e "\n\e[31mCommit aborted.\e[0m" >&2
+    exit 1
+fi
+
+gitcommit='git add --all && git commit --quiet --message "chore[auto]: pretty and eslint fix"'
+
+if git status --porcelain | awk '{ print $2 }' | grep -q "^src$"; then
+    npx build-once > /dev/null
+    forcmd='[ "src" != "$name" ] || if [ -d ../lib ]; then cd ../lib && '$gitcommit' || echo -n ""; fi'
+    git submodule foreach "$forcmd"
+fi
+
+git submodule foreach "$gitcommit"
+git add --all
+
+exit $?

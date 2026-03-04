@@ -31,10 +31,14 @@ for await (const filepath of fs.glob(
             )
         )
         .then(fs.writeFile.bind(fs, filepath))
-        .then(() => console.log(`✔ formatted ${filepath}`))
-        .catch(err =>
+        .catch(err => {
+            process.exitCode ??
+                console.error(
+                    "\x1b[4;33mErrors from PRETTIER:\x1b[0m\n"
+                );
+            process.exitCode = 1;
             console.error(
-                `✖ failed ${filepath}`,
+                `✖ failed to format ${filepath}`,
                 err.message
-            )
-        );
+            );
+        });

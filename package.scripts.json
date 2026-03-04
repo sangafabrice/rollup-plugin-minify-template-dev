@@ -14,6 +14,9 @@
   // - Disable JavaScript validation for FlowJS
   // - Configure Live Preview for the demo server
   "vscode:settings": "settings",
+  // Configure Pre-Commit Git-Hook
+  // Connect to Linux WSL2 or MSYS to run this script
+  "setprecommit": "setup/pre_commit_setup",
   // Commit from submodules
   "commit:lib": "commit-lib",
   "commit:src": "commit-lib --only src",

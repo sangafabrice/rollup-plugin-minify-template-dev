@@ -1,20 +1,13 @@
-import babel from "@babel/eslint-parser";
 import { defineConfig } from "eslint/config";
 import ftFlow from "eslint-plugin-ft-flow";
+import hermes from "hermes-eslint";
 
 export default defineConfig({
     files: ["{@flowtyped,demo,src}/**/*.{js,cjs,flow}"],
     ignores: ["**/package.js"],
     languageOptions: {
         sourceType: "module",
-        parser: babel,
-        parserOptions: {
-            requireConfigFile: false,
-            babelOptions: {
-                babelrc: false,
-                presets: ["@babel/preset-flow"]
-            }
-        }
+        parser: hermes
     },
     plugins: { "ft-flow": ftFlow },
     rules: {

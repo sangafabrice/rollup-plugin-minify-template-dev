@@ -12,12 +12,21 @@ import { ESLint } from "eslint";
     // 3. Modify the files with the fixed code.
     await ESLint.outputFixes(results);
 
+    const shouldFormat = results.some(
+        ({ errorCount }) => errorCount
+    );
+    process.exitCode = Number(shouldFormat);
+    if (!shouldFormat) return;
+
     // 4. Format the results.
     const formatter = await eslint.loadFormatter("stylish");
     const resultText = formatter.format(results);
 
     // 5. Output it.
-    console.log(resultText);
+    console.error(
+        "\x1b[4;33mErrors from ESLINT:\x1b[0m\n",
+        resultText
+    );
 })().catch(error => {
     process.exitCode = 1;
     console.error(error);
